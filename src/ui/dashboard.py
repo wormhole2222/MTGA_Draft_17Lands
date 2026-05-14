@@ -23,6 +23,7 @@ from src.ui.components import (
     TypePieChart,
     CollapsibleFrame,
     AutoScrollbar,
+    TwoCardComboPanel,
 )
 from src.advisor.schema import Recommendation
 from src.ui.advisor_view import AdvisorPanel
@@ -53,6 +54,7 @@ class DashboardFrame(ttk.Frame):
         self.signal_meter: Optional[SignalMeter] = None
         self.curve_plot: Optional[ManaCurvePlot] = None
         self.type_chart: Optional[TypePieChart] = None
+        self.combo_panel: Optional[TwoCardComboPanel] = None
 
         self.recap_screen: Optional[DraftRecapScreen] = None
 
@@ -451,6 +453,12 @@ class DashboardFrame(ttk.Frame):
             padx=(0, Theme.scaled_val(10)),
         )
 
+        self.combo_panel = TwoCardComboPanel(
+            self.sidebar_container,
+            self.configuration,
+        )
+        self.combo_panel.pack_forget()  # Hidden by default, shown only when alerts exist
+
         self.signal_container = CollapsibleFrame(
             self.sidebar_container,
             title="OPEN LANES",
@@ -489,6 +497,7 @@ class DashboardFrame(ttk.Frame):
         )
         self.type_chart = TypePieChart(self.pool_container.content_frame)
         self.type_chart.pack(fill="x")
+
 
     def _update_dashboard_state(self):
         """Evaluates the application data and smoothly swaps the active frame."""
@@ -826,6 +835,20 @@ class DashboardFrame(ttk.Frame):
     def update_recommendations(self, recs):
         if hasattr(self, "advisor_panel"):
             self.advisor_panel.update_recommendations(recs)
+
+    def update_combos(self, alerts: list, has_combo_file: bool):
+        if not self.combo_panel:
+            return
+        if not has_combo_file or not alerts:
+            self.combo_panel.pack_forget()
+            return
+        self.combo_panel.pack(
+            fill="x",
+            pady=(0, Theme.scaled_val(15)),
+            padx=(0, Theme.scaled_val(10)),
+            after=self.advisor_panel,
+        )
+        self.combo_panel.update_alerts(alerts)
 
     def _on_sash_drag_end(self, event):
         try:

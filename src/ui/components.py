@@ -1454,6 +1454,112 @@ class TypePieChart(tb.Frame):
         )
 
 
+class TwoCardComboPanel(tb.Frame):
+    """Sidebar panel that alerts when a pack card combos with a drafted card."""
+
+    def __init__(self, parent, configuration, **kwargs):
+        super().__init__(parent, **kwargs)
+        self.configuration = configuration
+        self.last_alerts = []
+        self.collapsible = CollapsibleFrame(
+            self,
+            title="TWO CARD COMBO ALERTS",
+            configuration=self.configuration,
+            setting_key="combo_panel",
+        )
+        self.collapsible.pack(fill="x", side="top", anchor="n")
+        self.container = tb.Frame(self.collapsible.content_frame)
+        self.container.pack(fill="both", expand=True, side="top", anchor="n")
+        self.bind_all("<<ThemeChanged>>", self._on_theme_change, add="+")
+
+    def _on_theme_change(self, event=None):
+        if self.winfo_exists():
+            self.update_alerts(self.last_alerts)
+
+    def update_alerts(self, alerts: list):
+        self.last_alerts = alerts
+        for widget in self.container.winfo_children():
+            widget.destroy()
+
+        if not alerts:
+            tb.Label(
+                self.container,
+                text="No combo pieces in this pack.",
+                font=Theme.scaled_font(9),
+            ).pack(pady=Theme.scaled_val(10), anchor="center")
+            return
+
+        for alert in alerts:
+            item_frame = tb.Frame(self.container)
+            item_frame.pack(
+                fill="x",
+                side="top",
+                anchor="nw",
+                padx=Theme.scaled_val(20),
+                pady=Theme.scaled_val((0, 12)),
+            )
+
+            # Left accent bar in warning/gold color to distinguish from advisor
+            accent = tkinter.Frame(item_frame, width=Theme.scaled_val(4))
+            try:
+                accent.configure(bg=Theme.WARNING)
+            except tkinter.TclError:
+                accent.configure(bg="#f59e0b")
+            accent.pack(side="left", fill="y", padx=Theme.scaled_val((2, 8)))
+
+            content_frame = tb.Frame(item_frame)
+            content_frame.pack(side="left", fill="both", expand=True)
+
+            # Card name — big bold (matches advisor card name style)
+            lbl_name = tb.Label(
+                content_frame,
+                text=alert["card_name"].upper(),
+                font=Theme.scaled_font(12, "bold"),
+                wraplength=Theme.scaled_val(160),
+                justify="left",
+            )
+            try:
+                lbl_name.configure(foreground=Theme.WARNING)
+            except tkinter.TclError:
+                lbl_name.configure(foreground="#f59e0b")
+            lbl_name.pack(anchor="nw", pady=Theme.scaled_val(2))
+
+            # Combo partners — "Combos with: " then bold card names, normal separators
+            partners = alert.get("combo_partners", [])
+            reason_frame = tb.Frame(content_frame)
+            reason_frame.pack(anchor="nw", pady=Theme.scaled_val((0, 2)))
+
+            tb.Label(
+                reason_frame,
+                text="Combos with: ",
+                font=Theme.scaled_font(9),
+            ).pack(side="left")
+
+            segments = []
+            for name, count in partners:
+                segments.append(f"{name} x{count}" if count > 1 else name)
+
+            for i, seg in enumerate(segments):
+                tb.Label(
+                    reason_frame,
+                    text=seg,
+                    font=Theme.scaled_font(9, "bold"),
+                ).pack(side="left")
+
+                if i < len(segments) - 2:
+                    tb.Label(
+                        reason_frame,
+                        text=", ",
+                        font=Theme.scaled_font(9),
+                    ).pack(side="left")
+                elif i == len(segments) - 2:
+                    tb.Label(
+                        reason_frame,
+                        text=" and ",
+                        font=Theme.scaled_font(9),
+                    ).pack(side="left")
+
+
 class ScrolledFrame(tb.Frame):
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)

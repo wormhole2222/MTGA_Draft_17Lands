@@ -17,6 +17,7 @@ from src.advisor.engine import DraftAdvisor
 from src.signals import SignalCalculator
 from src.card_logic import filter_options, get_deck_metrics
 from src.app_update import AppUpdate
+from src.combo_loader import combo_file_exists, load_combos, find_combo_alerts
 
 logger = logging.getLogger(__name__)
 
@@ -270,6 +271,22 @@ class AppController:
         self.app.dashboard.update_deck_balance(taken_cards)
         self.app.dashboard.orchestrator = self.orchestrator
         self.app.dashboard.update_pool_summary(taken_cards, metrics, draft_id)
+
+        # Combo alerts
+        has_combo_file = combo_file_exists(es)
+        if has_combo_file:
+            pack_cards_with_scores = []
+            for card in pack_cards:
+                score = next(
+                    (r.contextual_score for r in recommendations if r.card_name == card.get("name")),
+                    0.0,
+                )
+                pack_cards_with_scores.append({**card, "contextual_score": score})
+            combos = load_combos(es)
+            alerts = find_combo_alerts(pack_cards_with_scores, taken_cards, combos)
+        else:
+            alerts = []
+        self.app.dashboard.update_combos(alerts, has_combo_file)
 
         if self.app.overlay_window:
             self.app.overlay_window.update_data(
