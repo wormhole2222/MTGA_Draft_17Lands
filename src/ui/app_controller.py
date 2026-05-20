@@ -18,6 +18,7 @@ from src.signals import SignalCalculator
 from src.card_logic import filter_options, get_deck_metrics
 from src.app_update import AppUpdate
 from src.combo_loader import combo_file_exists, load_combos, find_combo_alerts
+from src.archetype_loader import archetype_file_exists, load_archetypes, get_archetype_counts
 
 logger = logging.getLogger(__name__)
 
@@ -287,6 +288,25 @@ class AppController:
         else:
             alerts = []
         self.app.dashboard.update_combos(alerts, has_combo_file)
+
+        # Archetype Tracking
+        if archetype_file_exists(es):
+            if es != self.app._archetype_panel_set:
+                self.app._archetypes_data = load_archetypes(es)
+                self.app._archetype_panel_set = es
+                self.app._selected_archetype_key = "none"
+                if self.app._archetypes_data:
+                    self.app.dashboard.show_archetype_panel(
+                        self.app._archetypes_data,
+                        on_archetype_change=self.app._on_archetype_selected,
+                    )
+
+            if self.app._archetypes_data:
+                pool_names = [c.get("name", "") for c in taken_cards]
+                counts = get_archetype_counts(
+                    self.app._selected_archetype_key, pool_names, self.app._archetypes_data
+                )
+                self.app.dashboard.update_archetypes(counts)
 
         if self.app.overlay_window:
             self.app.overlay_window.update_data(

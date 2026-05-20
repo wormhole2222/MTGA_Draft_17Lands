@@ -1560,6 +1560,164 @@ class TwoCardComboPanel(tb.Frame):
                     ).pack(side="left")
 
 
+class TextToolTip:
+    """Lightweight hover tooltip that shows a plain text list."""
+
+    def __init__(self, widget, lines: list[str]):
+        self._widget = widget
+        self._lines = lines
+        self._tip: Optional[tkinter.Toplevel] = None
+        widget.bind("<Enter>", self._show, add="+")
+        widget.bind("<Leave>", self._hide, add="+")
+
+    def _show(self, event=None):
+        if self._tip or not self._lines:
+            return
+        self._tip = tkinter.Toplevel(self._widget)
+        self._tip.wm_overrideredirect(True)
+        try:
+            self._tip.attributes("-topmost", True)
+        except Exception:
+            pass
+        self._tip.configure(bg=Theme.BG_SECONDARY)
+
+        for line in self._lines:
+            tkinter.Label(
+                self._tip,
+                text=line,
+                font=Theme.scaled_font(9),
+                bg=Theme.BG_SECONDARY,
+                fg=Theme.TEXT_MAIN,
+                anchor="w",
+                padx=Theme.scaled_val(8),
+                pady=Theme.scaled_val(2),
+            ).pack(fill="x", anchor="w")
+
+        self._tip.update_idletasks()
+        x = self._widget.winfo_rootx() + Theme.scaled_val(10)
+        y = self._widget.winfo_rooty() + self._widget.winfo_height() + Theme.scaled_val(2)
+        self._tip.geometry(f"+{x}+{y}")
+
+    def _hide(self, event=None):
+        if self._tip:
+            try:
+                self._tip.destroy()
+            except Exception:
+                pass
+            self._tip = None
+
+
+class ArchetypePanel(tb.Frame):
+    """Sidebar panel for tracking archetype-specific card counts in the draft pool."""
+
+    def __init__(self, parent, configuration, archetypes_data: dict, on_archetype_change=None, **kwargs):
+        super().__init__(parent, **kwargs)
+        self.configuration = configuration
+        self.archetypes_data = archetypes_data
+        self.on_archetype_change = on_archetype_change
+        self.current_counts = []
+
+        self.collapsible = CollapsibleFrame(
+            self,
+            title="ARCHETYPE TRACKER",
+            configuration=self.configuration,
+            setting_key="archetype_panel",
+        )
+        self.collapsible.pack(fill="x", side="top", anchor="n")
+
+        # Dropdown for archetype selection
+        selector_frame = tb.Frame(self.collapsible.content_frame)
+        selector_frame.pack(fill="x", padx=Theme.scaled_val(10), pady=Theme.scaled_val((8, 4)))
+
+        tb.Label(
+            selector_frame,
+            text="Archetype:",
+            font=Theme.scaled_font(9),
+        ).pack(side="left", padx=(0, Theme.scaled_val(6)))
+
+        options = [(k, v["label"]) for k, v in archetypes_data.items()]
+        self._archetype_keys = [k for k, _ in options]
+        labels = [lbl for _, lbl in options]
+
+        self._selected_label = tkinter.StringVar(value=labels[0] if labels else "")
+        self._dropdown = tb.Combobox(
+            selector_frame,
+            textvariable=self._selected_label,
+            values=labels,
+            state="readonly",
+        )
+        self._dropdown.pack(side="left", fill="x", expand=True)
+        self._dropdown.bind("<<ComboboxSelected>>", self._on_dropdown_change)
+
+        # Container for category count rows
+        self.container = tb.Frame(self.collapsible.content_frame)
+        self.container.pack(fill="both", expand=True, padx=Theme.scaled_val(10), pady=Theme.scaled_val((4, 8)))
+
+        self.bind_all("<<ThemeChanged>>", self._on_theme_change, add="+")
+
+    def _on_dropdown_change(self, event=None):
+        label = self._selected_label.get()
+        key = next((k for k, v in self.archetypes_data.items() if v["label"] == label), "none")
+        if self.on_archetype_change:
+            self.on_archetype_change(key)
+
+    def _on_theme_change(self, event=None):
+        if self.winfo_exists():
+            self.update_counts(self.current_counts)
+
+    def update_counts(self, counts: list):
+        """Refresh the category count rows. counts = [{"name": str, "count": int}, ...]"""
+        self.current_counts = counts
+        for widget in self.container.winfo_children():
+            widget.destroy()
+
+        if not counts:
+            tb.Label(
+                self.container,
+                text="No data available.",
+                font=Theme.scaled_font(9),
+            ).pack(pady=Theme.scaled_val(6), anchor="w")
+            return
+
+        for entry in counts:
+            row = tb.Frame(self.container)
+            row.pack(fill="x", pady=Theme.scaled_val(2))
+
+            tb.Label(
+                row,
+                text=entry["name"],
+                font=Theme.scaled_font(9),
+            ).pack(side="left")
+
+            # If category has repeatable cards, show "total (repeatable)" on the right
+            if "repeatable_count" in entry:
+                tb.Label(
+                    row,
+                    text=f"({entry['repeatable_count']})",
+                    font=Theme.scaled_font(9),
+                ).pack(side="right")
+                tb.Label(
+                    row,
+                    text=str(entry["count"]),
+                    font=Theme.scaled_font(9, "bold"),
+                ).pack(side="right", padx=(0, Theme.scaled_val(4)))
+            else:
+                tb.Label(
+                    row,
+                    text=str(entry["count"]),
+                    font=Theme.scaled_font(9, "bold"),
+                ).pack(side="right")
+
+            # Tooltip showing matched drafted cards
+            matched = entry.get("matched_cards", {})
+            if matched:
+                tooltip_lines = [
+                    f"{name} x{cnt}" if cnt > 1 else name
+                    for name, cnt in sorted(matched.items())
+                ]
+                TextToolTip(row, tooltip_lines)
+
+
 class ScrolledFrame(tb.Frame):
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)

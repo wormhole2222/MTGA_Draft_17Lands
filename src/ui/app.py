@@ -61,6 +61,11 @@ class DraftApp:
         self.active_event_type = ""
         self.current_draft_id = ""
 
+        # Archetype Tracking State
+        self._archetypes_data = None
+        self._archetype_panel_set = ""
+        self._selected_archetype_key = "none"
+
         # 2. INITIAL THEME APPLICATION
         current_scale = constants.UI_SIZE_DICT.get(
             self.configuration.settings.ui_size, 1.0
@@ -253,6 +258,18 @@ class DraftApp:
 
         parent_window = self.overlay_window if self.overlay_window else self.root
         SettingsWindow(parent_window, self.configuration, _on_settings_changed)
+
+
+    def _on_archetype_selected(self, key: str):
+        """Called when the user changes the archetype dropdown selection."""
+        self._selected_archetype_key = key
+        if self._archetypes_data:
+            taken_cards = self.orchestrator.scanner.retrieve_taken_cards()
+            pool_names = [c.get("name", "") for c in taken_cards]
+            from src.archetype_loader import get_archetype_counts
+            counts = get_archetype_counts(key, pool_names, self._archetypes_data)
+            self.dashboard.update_archetypes(counts)
+
 
     def _enable_overlay(self):
         if self.overlay_window:

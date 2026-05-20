@@ -24,6 +24,7 @@ from src.ui.components import (
     CollapsibleFrame,
     AutoScrollbar,
     TwoCardComboPanel,
+    ArchetypePanel,
 )
 from src.advisor.schema import Recommendation
 from src.ui.advisor_view import AdvisorPanel
@@ -55,6 +56,7 @@ class DashboardFrame(ttk.Frame):
         self.curve_plot: Optional[ManaCurvePlot] = None
         self.type_chart: Optional[TypePieChart] = None
         self.combo_panel: Optional[TwoCardComboPanel] = None
+        self.archetype_panel: Optional[ArchetypePanel] = None
 
         self.recap_screen: Optional[DraftRecapScreen] = None
 
@@ -459,6 +461,9 @@ class DashboardFrame(ttk.Frame):
         )
         self.combo_panel.pack_forget()  # Hidden by default, shown only when alerts exist
 
+        # Archetype panel — hidden until a set with archetype data is active
+        self.archetype_panel = None
+
         self.signal_container = CollapsibleFrame(
             self.sidebar_container,
             title="OPEN LANES",
@@ -849,6 +854,31 @@ class DashboardFrame(ttk.Frame):
             after=self.advisor_panel,
         )
         self.combo_panel.update_alerts(alerts)
+
+    def show_archetype_panel(self, archetypes_data: dict, on_archetype_change):
+        """Create and show the archetype panel for the current set."""
+        if self.archetype_panel:
+            try:
+                self.archetype_panel.destroy()
+            except Exception:
+                pass
+        self.archetype_panel = ArchetypePanel(
+            self.sidebar_container,
+            self.configuration,
+            archetypes_data=archetypes_data,
+            on_archetype_change=on_archetype_change,
+        )
+        self.archetype_panel.pack(
+            fill="x",
+            pady=(0, Theme.scaled_val(15)),
+            padx=(0, Theme.scaled_val(10)),
+            before=self.signal_container,
+        )
+
+    def update_archetypes(self, counts: list):
+        """Update the archetype category counts."""
+        if self.archetype_panel:
+            self.archetype_panel.update_counts(counts)
 
     def _on_sash_drag_end(self, event):
         try:

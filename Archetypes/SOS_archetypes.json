@@ -1,0 +1,229 @@
+{
+  "none": {
+    "label": "None",
+    "colors": null,
+    "categories": [
+      {
+        "name": "Removal",
+        "cards": [
+          "Prismatic Ending", "Repel Calamity", "Winds of Abandon", "Pongify",
+          "Bitter Triumph", "Dismember", "Feed the Swarm", "Locust Spray",
+          "Sheoldred's Edict", "Abrade", "Brotherhood's End", "Burst Lightning",
+          "Crackle with Power", "Subterranean Tremors", "Knockout Maneuver",
+          "Culling Ritual", "Archaic's Agony", "Artistic Process", "Burrog Barrage",
+          "Duel Tactics", "Heated Argument", "Impractical Joke", "Molten Note",
+          "Prismari Charm", "Splatter Technique", "Steal the Show", "Stress Dream",
+          "Together as One", "Tome Blast", "Traumatic Critique", "Unsubtle Mockery",
+          "Vibrant Outburst", "Wilt in the Heat", "Ajani's Response", "Erode",
+          "Foolish Fate", "Grapple with Death", "Harsh Annotation",
+          "Moment of Reckoning", "Professor Dellian Fel", "Stand Up for Yourself",
+          "Vicious Rivalry", "Witherbloom Charm", "Withering Curse", "End of the Hunt",
+          "Silverquill Charm", "Sundering Archaic", "Wander Off", "Dissection Practice",
+          "Last Gasp", "Poisoner's Apprentice", "Social Snub", "Run Behind",
+          "Essence Scatter", "Chelonian Tackle", "Procrastinate"
+        ]
+      },
+      {
+        "name": "Fixing",
+        "cards": [
+          "Great Hall of the Biblioplex", "Hydro-Channeler", "Potioner's Trove",
+          "Resonating Lute", "Deathcap Glade", "Dreamroot Cascade", "Fields of Strife",
+          "Forum of Amity", "Paradox Gardens", "Shattered Sanctum", "Skycoach Waypoint",
+          "Spectacle Summit", "Stormcarved Coast", "Sundown Pass", "Titan's Grave",
+          "Environmental Scientist", "Planar Engineering", "Proctor's Gaze",
+          "Strixhaven Skycoach", "Studious First-Year", "Terramorphic Expanse",
+          "Sanar, Unfinished Genius", "Goblin Glasswright", "Seize the Spoils",
+          "Big Score", "Shared Roots"
+        ]
+      }
+    ]
+  },
+  "silverquill": {
+    "label": "Silverquill (B/W)",
+    "colors": ["W", "B"],
+    "categories": [
+      {
+        "name": "Repartee Cards",
+        "cards": [
+          "Conciliator's Duelist", "Forum Necroscribe", "Graduation Day",
+          "Informed Inkwright", "Inkling Mascot", "Inkshape Demonstrator",
+          "Lecturing Scornmage", "Melancholic Poet", "Rehearsed Debater",
+          "Scolding Administrator", "Snooping Page", "Stirring Hopesinger"
+        ]
+      },
+      {
+        "name": "Repartee Triggers",
+        "cards": [
+          "Abigale, Poet Laureate", "Adventurous Eater", "Ajani's Response",
+          "Cost of Brilliance", "Daydream", "Dig Site Inventory", "Dissection Practice",
+          "Elite Interceptor", "Emeritus of Truce", "Erode", "Foolish Fate",
+          "Harsh Annotation", "Honorbound Page", "Interjection", "Last Gasp",
+          "Masterful Flourish", "Practiced Offense", "Quill-Blade Laureate",
+          "Rabid Attack", "Rapier Wit", "Render Speechless", "Scathing Shadelock",
+          "Silverquill Charm", "Spiritcall Enthusiast", "Stand Up for Yourself",
+          "Wander Off", "Killian's Confidence", "Prismatic Ending", "Repel Calamity",
+          "Winds of Abandon", "Bitter Triumph", "Dismember", "Feed the Swarm",
+          "Locust Spray"
+        ]
+      }
+    ]
+  },
+  "lorehold": {
+    "label": "Lorehold (R/W)",
+    "colors": ["R", "W"],
+    "categories": [
+      {
+        "name": "Graveyard Removal Payoffs",
+        "cards": [
+          "Ark of Hunger", "Garrison Excavator", "Hardened Academic", "Kirol, History Buff",
+          "Owlin Historian", "Spirit Mascot", "Living History", "Primary Research",
+          "Rubble Rouser", "Wilt in the Heat"
+        ]
+      },
+      {
+        "name": "Graveyard Removal Triggers",
+        "cards": [
+          "Antiquities on the Loose", "Daydream", "Dig Site Inventory", "Duel Tactics",
+          "Flashback", "Group Project", "Heated Argument", "Lorehold Charm", "Molten Note",
+          "Practiced Offense", "Practiced Scrollsmith", "Primary Research", "Pursue the Past",
+          "Soaring Stoneglider", "Stone Docent", "Tome Blast", "Zealous Lorecaster",
+          "Helping Hand", "Return to the Ranks", "Bulk Up"
+        ],
+        "repeatable_cards": [
+          "Ark of Hunger", "Ascendant Dustspeaker", "Restoration Seminar", "Rubble Rouser",
+          "Startled Relic Sloth", "Summoned Dromedary", "Sundering Archaic",
+          "The Dawning Archaic"
+        ]
+      },
+      {
+        "name": "Ways to Fill Graveyard",
+        "cards": [
+          "Ark of Hunger", "Hardened Academic", "Rubble Rouser", "Steal the Show",
+          "Borrowed Knowledge", "Charging Strifeknight", "Colossus of the Blood Age",
+          "Lorehold, the Historian", "Page, Loose Leaf", "Pursue the Past",
+          "Seize the Spoils", "Transcendent Archaic", "Kirol, History Buff",
+          "Tablet of Discovery", "Big Score"
+        ]
+      }
+    ]
+  },
+  "prismari": {
+    "label": "Prismari Control (R/U)",
+    "colors": null,
+    "categories": [
+      {
+        "name": "Card Advantage",
+        "cards": [
+          "Colossus of the Blood Age", "Cost of Brilliance", "Decorum Dissertation",
+          "Diary of Dreams", "Elite Interceptor", "Embrace the Paradox",
+          "Emeritus of Ideation", "Harmonized Trio", "Homesickness", "Landscape Painter",
+          "Mathemagics", "Mind into Matter", "Muse Seeker", "Orysa, Tide Choreographer",
+          "Pensive Professor", "Pursue the Past", "Professor Dellian Fel", "Quick Study",
+          "Rapturous Moment", "Seize the Spoils", "Rubble Rouser", "Spellbook Seeker",
+          "Splatter Technique", "Stadium Tidalmage", "Steal the Show",
+          "Tam, Observant Sequencer", "Together as One", "Transcendent Archaic",
+          "Traumatic Critique", "Witherbloom Charm", "Emeritus of Woe", "Flow State",
+          "Geometer's Arthropod", "Sanar, Unfinished Genius", "Stress Dream",
+          "Zimone's Experiment", "Deduce", "Preordain", "Sleight of Hand", "Stock Up",
+          "Stargaze", "Glimpse of Nature", "Shamanic Revelation", "Expressive Iteration",
+          "Visionary's Dance"
+        ]
+      },
+      {
+        "name": "Removal / Essence Scatters",
+        "cards": [
+          "Prismatic Ending", "Repel Calamity", "Winds of Abandon", "Pongify",
+          "Bitter Triumph", "Dismember", "Feed the Swarm", "Locust Spray",
+          "Sheoldred's Edict", "Abrade", "Brotherhood's End", "Burst Lightning",
+          "Crackle with Power", "Subterranean Tremors", "Knockout Maneuver",
+          "Culling Ritual", "Archaic's Agony", "Artistic Process", "Burrog Barrage",
+          "Duel Tactics", "Heated Argument", "Impractical Joke", "Molten Note",
+          "Prismari Charm", "Splatter Technique", "Steal the Show", "Stress Dream",
+          "Together as One", "Tome Blast", "Traumatic Critique", "Unsubtle Mockery",
+          "Vibrant Outburst", "Wilt in the Heat", "Ajani's Response", "Erode",
+          "Foolish Fate", "Grapple with Death", "Harsh Annotation",
+          "Moment of Reckoning", "Professor Dellian Fel", "Stand Up for Yourself",
+          "Vicious Rivalry", "Witherbloom Charm", "Withering Curse", "End of the Hunt",
+          "Silverquill Charm", "Sundering Archaic", "Wander Off", "Dissection Practice",
+          "Last Gasp", "Poisoner's Apprentice", "Social Snub", "Run Behind",
+          "Essence Scatter", "Chelonian Tackle", "Procrastinate"
+        ]
+      },
+      {
+        "name": "Counters (no Essence Scatter)",
+        "cards": [
+          "Spell Pierce", "Force of Will", "Flusterstorm", "Disdainful Stroke",
+          "Daze", "Brush Off", "Mana Sculpt"
+        ]
+      },
+      {
+        "name": "Top End Finishers",
+        "cards": [
+          "Divergent Equation", "Echocasting Symposium", "Colorstorm Stallion",
+          "Exhibition Tidecaller", "Improvisation Capstone", "Jadzi, Steward of Fate",
+          "Mathemagics", "Prismari, the Inspiration", "The Dawning Archaic",
+          "Traumatic Critique", "Visionary's Dance", "Wisdom of Ages", "Brain Freeze",
+          "Crackle with Power", "Moment of Reckoning", "Decorum Dissertation",
+          "Germination Practicum", "Restoration Seminar"
+        ]
+      },
+      {
+        "name": "Converge Payoffs",
+        "cards": [
+          "Arcane Omens", "Archaic's Agony", "Magmablood Archaic", "Rancorous Archaic",
+          "Snarl Song", "Sundering Archaic", "Together as One", "Transcendent Archaic",
+          "Wildgrowth Archaic", "Prismatic Ending"
+        ]
+      },
+      {
+        "name": "Fixing",
+        "cards": [
+          "Great Hall of the Biblioplex", "Hydro-Channeler", "Potioner's Trove",
+          "Resonating Lute", "Deathcap Glade", "Dreamroot Cascade", "Fields of Strife",
+          "Forum of Amity", "Paradox Gardens", "Shattered Sanctum", "Skycoach Waypoint",
+          "Spectacle Summit", "Stormcarved Coast", "Sundown Pass", "Titan's Grave",
+          "Environmental Scientist", "Planar Engineering", "Proctor's Gaze",
+          "Strixhaven Skycoach", "Studious First-Year", "Terramorphic Expanse",
+          "Sanar, Unfinished Genius", "Goblin Glasswright", "Seize the Spoils",
+          "Big Score", "Shared Roots"
+        ]
+      }
+    ]
+  },
+  "witherbloom": {
+    "label": "Witherbloom (B/G)",
+    "colors": ["B", "G"],
+    "categories": [
+      {
+        "name": "Lifegain Payoffs",
+        "cards": [
+          "Efflorescence", "Follow the Lumarets", "Foolish Fate", "Lumaret's Favor",
+          "Moseo, Vein's New Dean", "Old-Growth Educator", "Poisoner's Apprentice",
+          "Tenured Concocter", "Thornfist Striker", "Tragedy Feaster",
+          "Ulna Alley Shopkeep", "Withering Curse", "Leech Collector",
+          "Blech, Loafing Pest", "Comforting Counsel", "Pest Mascot"
+        ]
+      },
+      {
+        "name": "Lifegain Triggers",
+        "cards": [
+          "Adventurous Eater", "Colossus of the Blood Age", "Dissection Practice",
+          "Essenceknit Scholar", "Grapple with Death", "Infirmary Healer",
+          "Inkshape Demonstrator", "Lluwen, Exchange Student", "Mindful Biomancer",
+          "Moseo, Vein's New Dean", "Oracle's Restoration", "Pestbrood Sloth",
+          "Practiced Offense", "Pterafractyl", "Pull from the Grave", "Pursue the Past",
+          "Root Manipulation", "Scheming Silvertongue", "Send in the Pest",
+          "Shopkeeper's Bane", "Silverquill Charm", "Snarl Song", "Sneering Shadewriter",
+          "Social Snub", "Stone Docent", "Together as One", "Witherbloom Charm",
+          "Shattered Acolyte", "Startled Relic Sloth"
+        ],
+        "repeatable_cards": [
+          "Ark of Hunger", "Arnyn, Deathbloom Botanist", "Bogwater Lumaret",
+          "Cauldron of Essence", "Hardened Academic", "Melancholic Poet",
+          "Postmortem Professor", "Potioner's Trove", "Professor Dellian Fel",
+          "Tam, Observant Sequencer", "Teacher's Pest", "Stirring Hopesinger"
+        ]
+      }
+    ]
+  }
+}
