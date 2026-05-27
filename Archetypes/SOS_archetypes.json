@@ -108,7 +108,7 @@
     ]
   },
   "prismari": {
-    "label": "Prismari Control (R/U)",
+    "label": "Prismari Control (R/U + X)",
     "colors": null,
     "categories": [
       {
@@ -153,7 +153,7 @@
         "name": "Counters (no Essence Scatter)",
         "cards": [
           "Spell Pierce", "Force of Will", "Flusterstorm", "Disdainful Stroke",
-          "Daze", "Brush Off", "Mana Sculpt"
+          "Daze", "Brush Off", "Mana Sculpt", "Quandrix Charm"
         ]
       },
       {
@@ -191,7 +191,7 @@
     ]
   },
   "witherbloom": {
-    "label": "Witherbloom (B/G)",
+    "label": "Witherbloom (B/G + X)",
     "colors": ["B", "G"],
     "categories": [
       {
@@ -222,6 +222,71 @@
           "Cauldron of Essence", "Hardened Academic", "Melancholic Poet",
           "Postmortem Professor", "Potioner's Trove", "Professor Dellian Fel",
           "Tam, Observant Sequencer", "Teacher's Pest", "Stirring Hopesinger"
+        ]
+      }
+    ]
+  },
+  "quandrix": {
+    "label": "Quandrix Build Arounds (G/U)",
+    "colors": ["G", "U"],
+    "categories": [
+      {
+        "name": "X Spells",
+        "cards": [
+          "Traumatic Critique", "Pterafractyl", "Molten Note", "Mind into Matter",
+          "Wild Hypothesis", "Slumbering Trudge", "Infirmary Healer", "Procrastinate",
+          "Mathemagics", "Jadzi, Steward of Fate", "Fractalize", "Divergent Equation",
+          "Crackle with Power", "Awaken the Woods", "Stargaze", "Return to the Ranks",
+          "Prismatic Ending"
+        ]
+      },
+      {
+        "name": "X Spell Payoffs",
+        "cards": [
+          "Geometer's Arthropod", "Matterbending Mage", "Paradox Surveyor"
+        ]
+      },
+      {
+        "name": "Instant Speed",
+        "cards": [
+          "Banishing Betrayal", "Berserk", "Brain Freeze", "Brush Off", "Burrog Barrage",
+          "Chase Inspiration", "Crop Rotation", "Cuboid Colony", "Cyclonic Rift", "Daze",
+          "Deduce", "Disdainful Stroke", "Divergent Equation", "Efflorescence",
+          "Embrace the Paradox", "Emeritus of Ideation", "Essence Scatter", "Flusterstorm",
+          "Force of Will", "Fractal Anomaly", "Fractalize", "Giant Growth", "Glorious Decay",
+          "Harmonized Trio", "Homesickness", "Lumaret's Favor", "Mana Sculpt",
+          "Muse's Encouragement", "Pongify", "Proctor's Gaze", "Quandrix Charm",
+          "Quick Study", "Royal Treatment", "Run Behind", "Skycoach Conductor",
+          "Spell Pierce", "Vastlands Scavenger", "Veil of Summer"
+        ]
+      },
+      {
+        "name": "Counters/Protection Spells",
+        "cards": [
+          "Spell Pierce", "Force of Will", "Flusterstorm", "Disdainful Stroke",
+          "Daze", "Brush Off", "Mana Sculpt", "Quandrix Charm", "Veil of Summer",
+          "Royal Treatment", "Chase Inspiration", "Skycoach Conductor"
+        ]
+      },
+      {
+        "name": "Converge Payoffs",
+        "cards": [
+          "Arcane Omens", "Archaic's Agony", "Magmablood Archaic", "Rancorous Archaic",
+          "Snarl Song", "Sundering Archaic", "Together as One", "Transcendent Archaic",
+          "Wildgrowth Archaic", "Prismatic Ending"
+        ]
+      },
+      {
+        "name": "Fixing",
+        "cards": [
+          "Great Hall of the Biblioplex", "Hydro-Channeler", "Potioner's Trove",
+          "Resonating Lute", "Deathcap Glade", "Dreamroot Cascade", "Fields of Strife",
+          "Forum of Amity", "Paradox Gardens", "Shattered Sanctum", "Skycoach Waypoint",
+          "Spectacle Summit", "Stormcarved Coast", "Sundown Pass", "Titan's Grave",
+          "Environmental Scientist", "Planar Engineering", "Proctor's Gaze",
+          "Strixhaven Skycoach", "Studious First-Year", "Terramorphic Expanse",
+          "Sanar, Unfinished Genius", "Goblin Glasswright", "Seize the Spoils",
+          "Big Score", "Shared Roots"
         ]
       }
     ]
