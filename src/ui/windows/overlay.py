@@ -20,7 +20,6 @@ from src.ui.components import (
 from src.ui.advisor_view import AdvisorPanel
 from src.configuration import write_configuration
 from src.card_logic import format_win_rate
-from src.combo_loader import combo_file_exists, load_combos, find_combo_alerts
 
 
 class CompactOverlay(tb.Toplevel):
@@ -332,6 +331,7 @@ class CompactOverlay(tb.Toplevel):
         recommendations=None,
         picked_cards=None,
         scores=None,
+        combo_alerts=None,
     ):
         evt = self.app_context.vars["selected_event"].get()
         grp = self.app_context.vars["selected_group"].get()
@@ -378,21 +378,7 @@ class CompactOverlay(tb.Toplevel):
         self.advisor_panel.update_recommendations(recommendations)
         self.signal_meter.update_values(scores if scores is not None else {})
 
-        es, _ = self.app_context.orchestrator.scanner.retrieve_current_limited_event()
-        has_combo_file = combo_file_exists(es)
-        if has_combo_file and recommendations and pack_cards:
-            pack_cards_with_scores = []
-            for card in pack_cards:
-                score = next(
-                    (r.contextual_score for r in recommendations if r.card_name == card.get("name")),
-                    0.0,
-                )
-                pack_cards_with_scores.append({**card, "contextual_score": score})
-            combos = load_combos(es)
-            alerts = find_combo_alerts(pack_cards_with_scores, taken_cards or [], combos)
-        else:
-            alerts = []
-
+        alerts = combo_alerts or []
         if alerts:
             self.combo_panel.pack(fill="x", pady=(0, 10), side="top")
             self.combo_panel.update_alerts(alerts)

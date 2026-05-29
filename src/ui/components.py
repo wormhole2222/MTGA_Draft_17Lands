@@ -1635,15 +1635,10 @@ class ArchetypePanel(tb.Frame):
             font=Theme.scaled_font(9),
         ).pack(side="left", padx=(0, Theme.scaled_val(6)))
 
-        options = [(k, v["label"]) for k, v in archetypes_data.items()]
-        self._archetype_keys = [k for k, _ in options]
-        labels = [lbl for _, lbl in options]
-
-        self._selected_label = tkinter.StringVar(value=labels[0] if labels else "")
+        self._selected_label = tkinter.StringVar(value="")
         self._dropdown = tb.Combobox(
             selector_frame,
             textvariable=self._selected_label,
-            values=labels,
             state="readonly",
         )
         self._dropdown.pack(side="left", fill="x", expand=True)
@@ -1653,7 +1648,34 @@ class ArchetypePanel(tb.Frame):
         self.container = tb.Frame(self.collapsible.content_frame)
         self.container.pack(fill="both", expand=True, padx=Theme.scaled_val(10), pady=Theme.scaled_val((4, 8)))
 
+        self._populate_options()
         self.bind_all("<<ThemeChanged>>", self._on_theme_change, add="+")
+
+    def _populate_options(self):
+        """Fill the dropdown from self.archetypes_data and reset to the default selection.
+
+        Default to the "none" archetype if present, otherwise the first entry, so the
+        dropdown selection always matches the default key regardless of how the
+        archetypes file is ordered.
+        """
+        options = [(k, v["label"]) for k, v in self.archetypes_data.items()]
+        self._archetype_keys = [k for k, _ in options]
+        labels = [lbl for _, lbl in options]
+
+        default_label = next(
+            (lbl for key, lbl in options if key == "none"),
+            labels[0] if labels else "",
+        )
+        self._dropdown.configure(values=labels)
+        self._selected_label.set(default_label)
+
+    def set_archetypes(self, archetypes_data: dict, on_archetype_change=None):
+        """Swap in a new set's archetype definitions, reusing this panel (no rebuild)."""
+        self.archetypes_data = archetypes_data
+        if on_archetype_change is not None:
+            self.on_archetype_change = on_archetype_change
+        self._populate_options()
+        self.update_counts([])
 
     def _on_dropdown_change(self, event=None):
         label = self._selected_label.get()

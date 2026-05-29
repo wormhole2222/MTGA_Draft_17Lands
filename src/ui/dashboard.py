@@ -856,12 +856,14 @@ class DashboardFrame(ttk.Frame):
         self.combo_panel.update_alerts(alerts)
 
     def show_archetype_panel(self, archetypes_data: dict, on_archetype_change):
-        """Create and show the archetype panel for the current set."""
-        if self.archetype_panel:
-            try:
-                self.archetype_panel.destroy()
-            except Exception:
-                pass
+        """Create (or update) the archetype panel for the current set.
+
+        Reuses the existing panel when present so its global theme binding is
+        registered only once, instead of destroying and rebuilding on every set change.
+        """
+        if self.archetype_panel and self.archetype_panel.winfo_exists():
+            self.archetype_panel.set_archetypes(archetypes_data, on_archetype_change)
+            return
         self.archetype_panel = ArchetypePanel(
             self.sidebar_container,
             self.configuration,

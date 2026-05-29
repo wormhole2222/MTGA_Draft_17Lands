@@ -34,6 +34,11 @@ class AppController:
         self.previous_timestamp = 0
         self._update_task_id = None
 
+        # Combo cache (parsed once per set; reused every tick)
+        self._combo_set = None
+        self._combos = []
+        self._has_combo_file = False
+
     def start_boot_sync(self):
         """Phase 1: Immediate synchronization of critical UI components."""
         if not self.app._initialized:
@@ -273,9 +278,13 @@ class AppController:
         self.app.dashboard.orchestrator = self.orchestrator
         self.app.dashboard.update_pool_summary(taken_cards, metrics, draft_id)
 
-        # Combo alerts
-        has_combo_file = combo_file_exists(es)
-        if has_combo_file:
+        # Combo alerts (combos parsed once per set; matching runs every tick)
+        if es != self._combo_set:
+            self._combo_set = es
+            self._has_combo_file = combo_file_exists(es)
+            self._combos = load_combos(es) if self._has_combo_file else []
+
+        if self._has_combo_file:
             pack_cards_with_scores = []
             for card in pack_cards:
                 score = next(
@@ -283,11 +292,10 @@ class AppController:
                     0.0,
                 )
                 pack_cards_with_scores.append({**card, "contextual_score": score})
-            combos = load_combos(es)
-            alerts = find_combo_alerts(pack_cards_with_scores, taken_cards, combos)
+            alerts = find_combo_alerts(pack_cards_with_scores, taken_cards, self._combos)
         else:
             alerts = []
-        self.app.dashboard.update_combos(alerts, has_combo_file)
+        self.app.dashboard.update_combos(alerts, self._has_combo_file)
 
         # Archetype Tracking
         if archetype_file_exists(es):
@@ -318,6 +326,7 @@ class AppController:
                 recommendations,
                 current_picked_cards,
                 scores,
+                alerts,
             )
 
         # Broadcast refresh downwards
