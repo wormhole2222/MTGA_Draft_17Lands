@@ -18,7 +18,7 @@ from src.signals import SignalCalculator
 from src.card_logic import filter_options, get_deck_metrics
 from src.app_update import AppUpdate
 from src.combo_loader import combo_file_exists, load_combos, find_combo_alerts
-from src.archetype_loader import archetype_file_exists, load_archetypes, get_archetype_counts
+from src.archetype_loader import archetype_file_exists, load_archetypes
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +38,10 @@ class AppController:
         self._combo_set = None
         self._combos = []
         self._has_combo_file = False
+
+        # Archetype cache (existence stat'd once per set, mirroring the combo cache)
+        self._archetype_set = None
+        self._has_archetype_file = False
 
     def start_boot_sync(self):
         """Phase 1: Immediate synchronization of critical UI components."""
@@ -297,24 +301,23 @@ class AppController:
             alerts = []
         self.app.dashboard.update_combos(alerts, self._has_combo_file)
 
-        # Archetype Tracking
-        if archetype_file_exists(es):
-            if es != self.app._archetype_panel_set:
-                self.app._archetypes_data = load_archetypes(es)
-                self.app._archetype_panel_set = es
-                self.app._selected_archetype_key = "none"
-                if self.app._archetypes_data:
-                    self.app.dashboard.show_archetype_panel(
-                        self.app._archetypes_data,
-                        on_archetype_change=self.app._on_archetype_selected,
-                    )
-
-            if self.app._archetypes_data:
-                pool_names = [c.get("name", "") for c in taken_cards]
-                counts = get_archetype_counts(
-                    self.app._selected_archetype_key, pool_names, self.app._archetypes_data
+        # Archetype Tracking — existence + data cached per set (mirrors the combo
+        # cache above); counts are recomputed every refresh as the pool changes.
+        if es != self._archetype_set:
+            self._archetype_set = es
+            self._has_archetype_file = archetype_file_exists(es)
+            self.app._archetypes_data = load_archetypes(es) if self._has_archetype_file else {}
+            self.app._selected_archetype_key = "none"
+            if self._has_archetype_file and self.app._archetypes_data:
+                self.app.dashboard.show_archetype_panel(
+                    self.app._archetypes_data,
+                    on_archetype_change=self.app._on_archetype_selected,
                 )
-                self.app.dashboard.update_archetypes(counts)
+            else:
+                self.app.dashboard.hide_archetype_panel()
+
+        if self._has_archetype_file and self.app._archetypes_data:
+            self.app._update_archetype_counts(taken_cards)
 
         if self.app.overlay_window:
             self.app.overlay_window.update_data(

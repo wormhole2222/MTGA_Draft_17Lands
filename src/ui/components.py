@@ -1659,7 +1659,6 @@ class ArchetypePanel(tb.Frame):
         archetypes file is ordered.
         """
         options = [(k, v["label"]) for k, v in self.archetypes_data.items()]
-        self._archetype_keys = [k for k, _ in options]
         labels = [lbl for _, lbl in options]
 
         default_label = next(

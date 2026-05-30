@@ -49,10 +49,10 @@ def get_archetype_counts(
     results = []
     for category in archetype.get("categories", []):
         card_set = category.get("cards", [])
-        repeatable_set = category.get("repeatable_cards", [])
+        repeatable_set = set(category.get("repeatable_cards", []))
 
         # Count non-repeatable cards + repeatable cards for total
-        all_cards = set(card_set) | set(repeatable_set)
+        all_cards = set(card_set) | repeatable_set
 
         # Build matched card counts (preserving duplicates)
         matched_counts: dict[str, int] = {}
@@ -69,13 +69,3 @@ def get_archetype_counts(
         results.append(entry)
 
     return results
-
-
-def get_archetype_options(archetypes_data: dict) -> list[tuple[str, str]]:
-    """
-    Returns a list of (key, label) tuples for populating the archetype dropdown.
-    """
-    return [
-        (key, data["label"])
-        for key, data in archetypes_data.items()
-    ]

@@ -12,6 +12,7 @@ from typing import Dict, Optional
 
 from src import constants
 from src.configuration import write_configuration
+from src.archetype_loader import get_archetype_counts
 from src.ui.styles import Theme
 
 from src.ui.orchestrator import DraftOrchestrator
@@ -63,7 +64,6 @@ class DraftApp:
 
         # Archetype Tracking State
         self._archetypes_data = None
-        self._archetype_panel_set = ""
         self._selected_archetype_key = "none"
 
         # 2. INITIAL THEME APPLICATION
@@ -265,10 +265,20 @@ class DraftApp:
         self._selected_archetype_key = key
         if self._archetypes_data:
             taken_cards = self.orchestrator.scanner.retrieve_taken_cards()
-            pool_names = [c.get("name", "") for c in taken_cards]
-            from src.archetype_loader import get_archetype_counts
-            counts = get_archetype_counts(key, pool_names, self._archetypes_data)
-            self.dashboard.update_archetypes(counts)
+            self._update_archetype_counts(taken_cards)
+
+
+    def _update_archetype_counts(self, taken_cards):
+        """Compute the selected archetype's category counts from the current pool
+        and push them to the panel. Shared by the dropdown handler and the per-pick
+        refresh so the counting flow lives in exactly one place."""
+        if not self._archetypes_data:
+            return
+        pool_names = [c.get("name", "") for c in taken_cards]
+        counts = get_archetype_counts(
+            self._selected_archetype_key, pool_names, self._archetypes_data
+        )
+        self.dashboard.update_archetypes(counts)
 
 
     def _enable_overlay(self):

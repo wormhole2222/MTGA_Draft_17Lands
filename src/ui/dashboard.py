@@ -860,22 +860,29 @@ class DashboardFrame(ttk.Frame):
 
         Reuses the existing panel when present so its global theme binding is
         registered only once, instead of destroying and rebuilding on every set change.
+        Always (re-)packs afterward so a panel that was hidden on a set without
+        archetype data is shown again when returning to a set that has it.
         """
         if self.archetype_panel and self.archetype_panel.winfo_exists():
             self.archetype_panel.set_archetypes(archetypes_data, on_archetype_change)
-            return
-        self.archetype_panel = ArchetypePanel(
-            self.sidebar_container,
-            self.configuration,
-            archetypes_data=archetypes_data,
-            on_archetype_change=on_archetype_change,
-        )
+        else:
+            self.archetype_panel = ArchetypePanel(
+                self.sidebar_container,
+                self.configuration,
+                archetypes_data=archetypes_data,
+                on_archetype_change=on_archetype_change,
+            )
         self.archetype_panel.pack(
             fill="x",
             pady=(0, Theme.scaled_val(15)),
             padx=(0, Theme.scaled_val(10)),
             before=self.signal_container,
         )
+
+    def hide_archetype_panel(self):
+        """Hide the archetype panel when the active set has no archetype data."""
+        if self.archetype_panel and self.archetype_panel.winfo_exists():
+            self.archetype_panel.pack_forget()
 
     def update_archetypes(self, counts: list):
         """Update the archetype category counts."""
