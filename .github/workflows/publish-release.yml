@@ -126,8 +126,9 @@ jobs:
 
           # Parse version to generate Tag Name
           with open('src/constants.py', 'r', encoding='utf-8') as f:
-            ver_float = float(re.search(r'APPLICATION_VERSION\s*=\s*[^0-9]*([0-9.]+)', f.read()).group(1))
-          tag_name = f'MTGA_Draft_Tool_V{int(round(ver_float * 100)):04d}'
+            ver_raw = re.search(r'APPLICATION_VERSION\s*=\s*(.+)', f.read()).group(1).strip().strip(chr(34)).strip(chr(39))
+          ver_num = re.match(r'[0-9.]+', ver_raw).group(0)
+          tag_name = f'MTGA_Draft_Tool_V{int(round(float(ver_num) * 100)):04d}{ver_raw[len(ver_num):]}'
 
           # Output tag to GitHub Actions environment
           with open(os.environ.get('GITHUB_OUTPUT', ''), 'a') as f:

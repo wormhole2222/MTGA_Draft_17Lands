@@ -80,17 +80,22 @@ class SetDictionary(BaseModel):
             set_code=REPLACE_PHRASE_LATEST,
             keywords=["ArenaOpen", "Day2"],
         ),
-        SpecialEvent(
-            label="QualSealed",
-            type="Sealed",
-            set_code=REPLACE_PHRASE_LATEST,
-            keywords=["Qualifier"],
-        ),
+        # QualDraft must be listed before QualSealed. A qualifier *draft* event
+        # name contains both "Qualifier" and "Draft", so it also satisfies the
+        # broader QualSealed (["Qualifier"]) rule. __check_special_event returns on
+        # the first match, so the more specific draft rule has to come first —
+        # otherwise draft qualifiers are misclassified as Sealed.
         SpecialEvent(
             label="QualDraft",
             type="PremierDraft",
             set_code=REPLACE_PHRASE_LATEST,
             keywords=["Qualifier", "Draft"],
+        ),
+        SpecialEvent(
+            label="QualSealed",
+            type="Sealed",
+            set_code=REPLACE_PHRASE_LATEST,
+            keywords=["Qualifier"],
         ),
     ]
 
