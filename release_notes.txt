@@ -1,3 +1,9 @@
+===================== RELEASE NOTES 4.16-jr1 =====================
+* wormhole2222: [Feature] Added Two Card Combo Alerts sidebar panel. Detects when a card in the live pack combos with a card already in your pool and highlights it, using per-set combo definitions in the Combos folder.
+* wormhole2222: [Feature] Added Archetype Tracker sidebar panel (also pinned to the top of the Mini Mode Stats tab). Select a target archetype from a dropdown to see live counts of the key cards you've drafted toward it, using per-set definitions in the Archetypes folder.
+* wormhole2222: [Bug] Fixed Arena qualifier *drafts* being misclassified as Sealed by the event detector, which previously hid the pack/pick view.
+* wormhole2222: [Set Data] Added archetype and two-card combo definitions for **SOS**.
+
 ===================== RELEASE NOTES 4.16 =====================
 * unrealities: [Feature] Added full support for **Contender Draft**, MTG Arena's new high-stakes Best-of-1 Limited format.
 * unrealities: [Development] Completely migrated the project's dependency management from Pip (`requirements.txt`) to **Python Poetry**. This drastically improves deterministic builds across Windows, macOS, and Linux, and unifies the local development environment.

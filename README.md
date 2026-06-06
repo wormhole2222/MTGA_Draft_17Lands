@@ -26,7 +26,7 @@ Magic: The Gathering Arena draft tool that utilizes 17Lands data.
 
 Because this is a free, open-source community project, the application is not signed with a paid Apple Developer Certificate ($100/year). As a result, macOS and Windows SmartScreen will flag the application as an "Unidentified Developer."
 
-To guarantee the integrity of your download, our GitHub Actions pipeline automatically generates a **SHA-256 Checksum** for every release. You can compare the hash of your downloaded file against the `.sha256` file listed on the [Releases page](https://github.com/unrealities/MTGA_Draft_17Lands/releases) to verify it has not been maliciously modified.
+To guarantee the integrity of your download, our GitHub Actions pipeline automatically generates a **SHA-256 Checksum** for every release. You can compare the hash of your downloaded file against the `.sha256` file listed on the [Releases page](https://github.com/wormhole2222/MTGA_Draft_17Lands/releases) to verify it has not been maliciously modified.
 
 **Mac Users: Bypassing the "App is Damaged" or "Malware" prompt**
 macOS actively quarantines unsigned apps downloaded from the internet. To run the app safely:
@@ -40,7 +40,7 @@ macOS actively quarantines unsigned apps downloaded from the internet. To run th
 
 ## Run Steps: Standalone App (Windows / macOS / Linux)
 
-- **Step 1:** Download the latest release for your operating system from the [releases page](https://github.com/unrealities/MTGA_Draft_17Lands/releases).
+- **Step 1:** Download the latest release for your operating system from the [releases page](https://github.com/wormhole2222/MTGA_Draft_17Lands/releases).
 - **Step 2:** Install/Extract the application:
   - **Windows:** Unzip and double-click the installer executable. *(Run as administrator if installing to restricted folders like Program Files).*
   - **macOS:** Unzip the downloaded file and drag `MTGA_Draft_Tool.app` to your Applications folder. *(See the Security section above if macOS blocks the app from running).*
@@ -56,7 +56,7 @@ macOS actively quarantines unsigned apps downloaded from the internet. To run th
 
 ## Run Steps: Python (Windows / macOS / Linux)
 
-- **Step 1:** [Download](https://github.com/unrealities/MTGA_Draft_17Lands/archive/refs/heads/main.zip) and unzip the repository.
+- **Step 1:** [Download](https://github.com/wormhole2222/MTGA_Draft_17Lands/archive/refs/heads/main.zip) and unzip the repository.
 - **Step 2:** Download and install **Python 3.12**.
 - **Step 3:** Confirm that you're running Python 3.12 by opening the terminal and entering `python --version` (or `python3 --version`).
 - **Step 4:** Install the Poetry package manager by entering `pip install poetry`.
