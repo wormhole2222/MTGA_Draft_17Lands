@@ -94,6 +94,8 @@ The application is structured into a collapsible Live Dashboard and several func
 - **Live Pack:** Displays the cards currently offered to you with their tactical scores.
 - **Seen Cards (Wheel Tracker):** Tracks cards you passed previously in the draft.
 - **Sidebar:** Contains visual "Open Lane" Signal detection, your current Mana Curve, and your Pool Balance (Creatures/Spells/Lands). You can click on the headers of these panels to collapse them.
+- **Two Card Combo Alerts:** A sidebar panel that watches the live pack and flags when a card offered to you combos with a card already in your pool, showing which drafted card(s) it pairs with. Combo pairings are defined per set, so the list grows as new ones are added.
+- **Archetype Tracker:** A sidebar panel where you pick a target archetype from a dropdown and see live counts of the key cards you've drafted toward it (removal, fixing, payoffs, etc.). It also appears at the top of the Stats tab in **Mini Mode**. Each set has its own archetype definitions.
 
 ### Application Tabs
 - **Datasets:** Manage, download, and update 17Lands card data locally. Provides detailed download summaries, including exactly how many MTGA cards were successfully matched with 17Lands telemetry data.
@@ -133,6 +135,7 @@ The application looks for the configuration file in the following order:
 - Downloaded card data is stored in the `Sets` folder.
 - Custom Tier lists are stored in the `Tier` folder.
 - Application debug logs are stored in the `Debug` folder, and draft logs are in the `Logs` folder.
+- Two card combo definitions live in the `Combos` folder and archetype definitions in the `Archetypes` folder (each organized per set).
 
 ---
 
