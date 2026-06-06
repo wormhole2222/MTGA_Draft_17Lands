@@ -279,6 +279,8 @@ class DraftApp:
             self._selected_archetype_key, pool_names, self._archetypes_data
         )
         self.dashboard.update_archetypes(counts)
+        if self.overlay_window and getattr(self.overlay_window, "archetype_panel", None):
+            self.overlay_window.archetype_panel.update_counts(counts)
 
 
     def _enable_overlay(self):

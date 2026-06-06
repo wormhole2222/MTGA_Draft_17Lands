@@ -1610,23 +1610,30 @@ class TextToolTip:
 class ArchetypePanel(tb.Frame):
     """Sidebar panel for tracking archetype-specific card counts in the draft pool."""
 
-    def __init__(self, parent, configuration, archetypes_data: dict, on_archetype_change=None, **kwargs):
+    def __init__(self, parent, configuration, archetypes_data: dict, on_archetype_change=None, collapsible=True, **kwargs):
         super().__init__(parent, **kwargs)
         self.configuration = configuration
         self.archetypes_data = archetypes_data
         self.on_archetype_change = on_archetype_change
         self.current_counts = []
 
-        self.collapsible = CollapsibleFrame(
-            self,
-            title="ARCHETYPE TRACKER",
-            configuration=self.configuration,
-            setting_key="archetype_panel",
-        )
-        self.collapsible.pack(fill="x", side="top", anchor="n")
+        if collapsible:
+            self.collapsible = CollapsibleFrame(
+                self,
+                title="ARCHETYPE TRACKER",
+                configuration=self.configuration,
+                setting_key="archetype_panel",
+            )
+            self.collapsible.pack(fill="x", side="top", anchor="n")
+            body = self.collapsible.content_frame
+        else:
+            # Flat mode (overlay stats tab): no collapsible header — the host supplies
+            # its own plain title label to match the other stats-tab sections.
+            self.collapsible = None
+            body = self
 
         # Dropdown for archetype selection
-        selector_frame = tb.Frame(self.collapsible.content_frame)
+        selector_frame = tb.Frame(body)
         selector_frame.pack(fill="x", padx=Theme.scaled_val(10), pady=Theme.scaled_val((8, 4)))
 
         tb.Label(
@@ -1645,7 +1652,7 @@ class ArchetypePanel(tb.Frame):
         self._dropdown.bind("<<ComboboxSelected>>", self._on_dropdown_change)
 
         # Container for category count rows
-        self.container = tb.Frame(self.collapsible.content_frame)
+        self.container = tb.Frame(body)
         self.container.pack(fill="both", expand=True, padx=Theme.scaled_val(10), pady=Theme.scaled_val((4, 8)))
 
         self._populate_options()
@@ -1675,6 +1682,16 @@ class ArchetypePanel(tb.Frame):
             self.on_archetype_change = on_archetype_change
         self._populate_options()
         self.update_counts([])
+
+    def set_selection(self, key: str):
+        """Set the dropdown to display the given archetype key's label.
+
+        Display-only: updates the visible selection without firing the change
+        callback. Used to sync the overlay's dropdown to the active selection.
+        """
+        label = next((v["label"] for k, v in self.archetypes_data.items() if k == key), None)
+        if label is not None:
+            self._selected_label.set(label)
 
     def _on_dropdown_change(self, event=None):
         label = self._selected_label.get()

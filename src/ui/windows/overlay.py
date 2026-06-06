@@ -16,6 +16,7 @@ from src.ui.components import (
     ManaCurvePlot,
     TypePieChart,
     TwoCardComboPanel,
+    ArchetypePanel,
 )
 from src.ui.advisor_view import AdvisorPanel
 from src.configuration import write_configuration
@@ -226,12 +227,20 @@ class CompactOverlay(tb.Toplevel):
         self.combo_panel.pack_forget()  # Hidden until there are alerts
 
         # 4. Stats Tab
-        tb.Label(
+        # Archetype tracker is created lazily by show_archetype_panel() and inserted
+        # above OPEN LANES, so keep a handle to this label to pack before it. The title
+        # and panel are created/shown/hidden together as a unit.
+        self.archetype_panel = None
+        self.archetype_title = None
+        self._archetype_shown = False
+
+        self.open_lanes_label = tb.Label(
             self.tab_stats,
             text="OPEN LANES",
             font=Theme.scaled_font(10, "bold"),
             bootstyle="primary",
-        ).pack(anchor="w", pady=(0, Theme.scaled_val(5)))
+        )
+        self.open_lanes_label.pack(anchor="w", pady=(0, Theme.scaled_val(5)))
         self.signal_meter = SignalMeter(self.tab_stats)
         self.signal_meter.pack(fill=X, pady=(0, Theme.scaled_val(15)))
 
@@ -267,6 +276,45 @@ class CompactOverlay(tb.Toplevel):
             self.curve_plot.redraw()
         if hasattr(self, "type_chart"):
             self.type_chart.redraw()
+
+    def show_archetype_panel(self, archetypes_data, on_archetype_change, selected_key):
+        """Create-or-show the flat archetype tracker at the top of the Stats tab.
+
+        Created lazily (and synced once to the active selection on first appearance)
+        so it shows up whether mini mode was opened before or during the draft. The
+        title and panel are packed above OPEN LANES and toggled together as a unit.
+        """
+        if self.archetype_panel is None:
+            self.archetype_title = tb.Label(
+                self.tab_stats,
+                text="ARCHETYPE TRACKER",
+                font=Theme.scaled_font(10, "bold"),
+                bootstyle="primary",
+            )
+            self.archetype_panel = ArchetypePanel(
+                self.tab_stats,
+                self.configuration,
+                archetypes_data=archetypes_data,
+                on_archetype_change=on_archetype_change,
+                collapsible=False,
+            )
+            self.archetype_panel.set_selection(selected_key)
+
+        if not self._archetype_shown:
+            self.archetype_title.pack(
+                anchor="w", pady=(0, Theme.scaled_val(5)), before=self.open_lanes_label
+            )
+            self.archetype_panel.pack(
+                fill=X, pady=(0, Theme.scaled_val(15)), before=self.open_lanes_label
+            )
+            self._archetype_shown = True
+
+    def hide_archetype_panel(self):
+        """Hide the archetype title + panel together (e.g. a set with no archetype data)."""
+        if self.archetype_panel is not None and self._archetype_shown:
+            self.archetype_panel.pack_forget()
+            self.archetype_title.pack_forget()
+            self._archetype_shown = False
 
     def _force_stats_redraw(self):
         """Deep redraw to ensure canvases appear even if the tab was hidden."""
@@ -380,7 +428,7 @@ class CompactOverlay(tb.Toplevel):
 
         alerts = combo_alerts or []
         if alerts:
-            self.combo_panel.pack(fill="x", pady=(0, 10), side="top")
+            self.combo_panel.pack(fill="x", pady=(0, Theme.scaled_val(10)), side="top")
             self.combo_panel.update_alerts(alerts)
         else:
             self.combo_panel.pack_forget()

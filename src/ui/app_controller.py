@@ -316,6 +316,20 @@ class AppController:
             else:
                 self.app.dashboard.hide_archetype_panel()
 
+        # Overlay archetype panel (Option Y): create-or-show/hide every refresh so it
+        # appears whether mini mode was opened before or during the draft. Driven here,
+        # before the counts push below, so a freshly created panel is populated the same
+        # tick instead of flashing empty.
+        if self.app.overlay_window:
+            if self._has_archetype_file and self.app._archetypes_data:
+                self.app.overlay_window.show_archetype_panel(
+                    self.app._archetypes_data,
+                    self.app._on_archetype_selected,
+                    self.app._selected_archetype_key,
+                )
+            else:
+                self.app.overlay_window.hide_archetype_panel()
+
         if self._has_archetype_file and self.app._archetypes_data:
             self.app._update_archetype_counts(taken_cards)
 
