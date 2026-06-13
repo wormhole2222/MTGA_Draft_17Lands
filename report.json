@@ -1,0 +1,345 @@
+{
+  "pipeline_run": {
+    "started_at": "2026-06-13T15:52:06.362613+00:00",
+    "completed_at": "2026-06-13T16:29:58.076081+00:00",
+    "duration_sec": 2271.7,
+    "status": "SUCCESS"
+  },
+  "api_stats": {
+    "total_requests": 385,
+    "failed_requests": 0,
+    "cached_requests": 135
+  },
+  "intent": {
+    "scheduled_events": {
+      "SOS": {
+        "formats": [
+          "TradDraft",
+          "PremierDraft",
+          "PickTwoDraft"
+        ],
+        "start_date": "2026-04-21"
+      },
+      "TDM": {
+        "formats": [
+          "Sealed",
+          "PremierDraft"
+        ],
+        "start_date": "2026-06-09"
+      },
+      "MKM": {
+        "formats": [
+          "QuickDraft"
+        ],
+        "start_date": "2026-06-08"
+      },
+      "Cube - Powered": {
+        "formats": [
+          "TradDraft",
+          "PremierDraft"
+        ],
+        "start_date": "2026-06-02"
+      },
+      "FDN": {
+        "formats": [
+          "Sealed"
+        ],
+        "start_date": "2026-06-12"
+      }
+    },
+    "archetypes_targeted": [
+      "All Decks",
+      "W",
+      "U",
+      "B",
+      "R",
+      "G",
+      "WU",
+      "UB",
+      "BR",
+      "RG",
+      "WG",
+      "WB",
+      "UR",
+      "BG",
+      "WR",
+      "UG",
+      "WUB",
+      "UBR",
+      "BRG",
+      "WRG",
+      "WUG",
+      "WBR",
+      "URG",
+      "WBG",
+      "WUR",
+      "UBG",
+      "WUBR",
+      "UBRG",
+      "WBRG",
+      "WURG",
+      "WUBG",
+      "WUBRG"
+    ],
+    "user_types_targeted": [
+      "All",
+      "Top"
+    ]
+  },
+  "execution_summary": {
+    "formats_updated": 18,
+    "formats_skipped": 0,
+    "total_output_kb": 3160,
+    "total_cards_rated": 24904,
+    "total_errors": 0,
+    "total_warnings": 0
+  },
+  "warehouse_state": {
+    "total_available_datasets": 22,
+    "available_keys": [
+      "SOS_PickTwoDraft_All",
+      "SOS_PickTwoDraft_Top",
+      "SOS_QuickDraft_All",
+      "SOS_QuickDraft_Top",
+      "SOS_TradDraft_All",
+      "SOS_TradDraft_Top",
+      "SOS_PremierDraft_All",
+      "SOS_PremierDraft_Top",
+      "TLA_PremierDraft_All",
+      "TLA_PremierDraft_Top",
+      "Cube - Powered_TradDraft_All",
+      "Cube - Powered_TradDraft_Top",
+      "Cube - Powered_PremierDraft_All",
+      "Cube - Powered_PremierDraft_Top",
+      "MKM_QuickDraft_All",
+      "MKM_QuickDraft_Top",
+      "TDM_Sealed_All",
+      "TDM_Sealed_Top",
+      "TDM_PremierDraft_All",
+      "TDM_PremierDraft_Top",
+      "FDN_Sealed_All",
+      "FDN_Sealed_Top"
+    ]
+  },
+  "datasets_updated": [
+    {
+      "set": "SOS",
+      "format": "TradDraft",
+      "user_group": "All",
+      "filename": "SOS_TradDraft_All_Data.json.gz",
+      "size_kb": 183,
+      "card_count": 1344,
+      "start_date": "2026-04-21",
+      "end_date": "2026-06-13",
+      "game_count": 158434,
+      "status": "success"
+    },
+    {
+      "set": "SOS",
+      "format": "TradDraft",
+      "user_group": "Top",
+      "filename": "SOS_TradDraft_Top_Data.json.gz",
+      "size_kb": 140,
+      "card_count": 1344,
+      "start_date": "2026-04-21",
+      "end_date": "2026-06-13",
+      "game_count": 16472,
+      "status": "success"
+    },
+    {
+      "set": "SOS",
+      "format": "PremierDraft",
+      "user_group": "All",
+      "filename": "SOS_PremierDraft_All_Data.json.gz",
+      "size_kb": 238,
+      "card_count": 1344,
+      "start_date": "2026-04-21",
+      "end_date": "2026-06-13",
+      "game_count": 1099916,
+      "status": "success"
+    },
+    {
+      "set": "SOS",
+      "format": "PremierDraft",
+      "user_group": "Top",
+      "filename": "SOS_PremierDraft_Top_Data.json.gz",
+      "size_kb": 179,
+      "card_count": 1344,
+      "start_date": "2026-04-21",
+      "end_date": "2026-06-13",
+      "game_count": 144348,
+      "status": "success"
+    },
+    {
+      "set": "SOS",
+      "format": "PickTwoDraft",
+      "user_group": "All",
+      "filename": "SOS_PickTwoDraft_All_Data.json.gz",
+      "size_kb": 189,
+      "card_count": 1344,
+      "start_date": "2026-04-21",
+      "end_date": "2026-06-13",
+      "game_count": 167170,
+      "status": "success"
+    },
+    {
+      "set": "SOS",
+      "format": "PickTwoDraft",
+      "user_group": "Top",
+      "filename": "SOS_PickTwoDraft_Top_Data.json.gz",
+      "size_kb": 103,
+      "card_count": 1344,
+      "start_date": "2026-04-21",
+      "end_date": "2026-06-13",
+      "game_count": 0,
+      "status": "success"
+    },
+    {
+      "set": "TDM",
+      "format": "Sealed",
+      "user_group": "All",
+      "filename": "TDM_Sealed_All_Data.json.gz",
+      "size_kb": 124,
+      "card_count": 1217,
+      "start_date": "2025-04-08",
+      "end_date": "2026-06-13",
+      "game_count": 42989,
+      "status": "success"
+    },
+    {
+      "set": "TDM",
+      "format": "Sealed",
+      "user_group": "Top",
+      "filename": "TDM_Sealed_Top_Data.json.gz",
+      "size_kb": 94,
+      "card_count": 1217,
+      "start_date": "2025-04-08",
+      "end_date": "2026-06-13",
+      "game_count": 1284,
+      "status": "success"
+    },
+    {
+      "set": "TDM",
+      "format": "PremierDraft",
+      "user_group": "All",
+      "filename": "TDM_PremierDraft_All_Data.json.gz",
+      "size_kb": 231,
+      "card_count": 1217,
+      "start_date": "2025-04-08",
+      "end_date": "2026-06-13",
+      "game_count": 1158736,
+      "status": "success"
+    },
+    {
+      "set": "TDM",
+      "format": "PremierDraft",
+      "user_group": "Top",
+      "filename": "TDM_PremierDraft_Top_Data.json.gz",
+      "size_kb": 181,
+      "card_count": 1217,
+      "start_date": "2025-04-08",
+      "end_date": "2026-06-13",
+      "game_count": 177188,
+      "status": "success"
+    },
+    {
+      "set": "MKM",
+      "format": "QuickDraft",
+      "user_group": "All",
+      "filename": "MKM_QuickDraft_All_Data.json.gz",
+      "size_kb": 217,
+      "card_count": 1278,
+      "start_date": "2024-02-06",
+      "end_date": "2026-06-13",
+      "game_count": 320946,
+      "status": "success"
+    },
+    {
+      "set": "MKM",
+      "format": "QuickDraft",
+      "user_group": "Top",
+      "filename": "MKM_QuickDraft_Top_Data.json.gz",
+      "size_kb": 102,
+      "card_count": 1278,
+      "start_date": "2024-02-06",
+      "end_date": "2026-06-13",
+      "game_count": 0,
+      "status": "success"
+    },
+    {
+      "set": "Cube - Powered",
+      "format": "TradDraft",
+      "user_group": "All",
+      "filename": "Cube - Powered_TradDraft_All_Data.json.gz",
+      "size_kb": 227,
+      "card_count": 1769,
+      "start_date": "2026-06-02",
+      "end_date": "2026-06-13",
+      "game_count": 11822,
+      "status": "success"
+    },
+    {
+      "set": "Cube - Powered",
+      "format": "TradDraft",
+      "user_group": "Top",
+      "filename": "Cube - Powered_TradDraft_Top_Data.json.gz",
+      "size_kb": 176,
+      "card_count": 1769,
+      "start_date": "2026-06-02",
+      "end_date": "2026-06-13",
+      "game_count": 1054,
+      "status": "success"
+    },
+    {
+      "set": "Cube - Powered",
+      "format": "PremierDraft",
+      "user_group": "All",
+      "filename": "Cube - Powered_PremierDraft_All_Data.json.gz",
+      "size_kb": 343,
+      "card_count": 1769,
+      "start_date": "2026-06-02",
+      "end_date": "2026-06-13",
+      "game_count": 125015,
+      "status": "success"
+    },
+    {
+      "set": "Cube - Powered",
+      "format": "PremierDraft",
+      "user_group": "Top",
+      "filename": "Cube - Powered_PremierDraft_Top_Data.json.gz",
+      "size_kb": 216,
+      "card_count": 1675,
+      "start_date": "2026-06-02",
+      "end_date": "2026-06-13",
+      "game_count": 15364,
+      "status": "success"
+    },
+    {
+      "set": "FDN",
+      "format": "Sealed",
+      "user_group": "All",
+      "filename": "FDN_Sealed_All_Data.json.gz",
+      "size_kb": 128,
+      "card_count": 1217,
+      "start_date": "2024-11-12",
+      "end_date": "2026-06-13",
+      "game_count": 43755,
+      "status": "success"
+    },
+    {
+      "set": "FDN",
+      "format": "Sealed",
+      "user_group": "Top",
+      "filename": "FDN_Sealed_Top_Data.json.gz",
+      "size_kb": 89,
+      "card_count": 1217,
+      "start_date": "2024-11-12",
+      "end_date": "2026-06-13",
+      "game_count": 1370,
+      "status": "success"
+    }
+  ],
+  "datasets_skipped": [],
+  "errors": [],
+  "warnings": []
+}
