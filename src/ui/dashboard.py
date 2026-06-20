@@ -264,14 +264,20 @@ class DashboardFrame(ttk.Frame):
             )
 
         self.recap_screen = DraftRecapScreen(
-            self.recovery_frame, launch_sealed_callback=_launch_sealed
+            self.recovery_frame,
+            launch_sealed_callback=_launch_sealed,
+            configuration=self.configuration,
         )
         self.recap_screen.grid(row=0, column=0, sticky="nsew")
 
     def update_pool_summary(self, taken_cards, metrics, draft_id=""):
         if self.recap_screen:
             self.recap_screen.update_summary(
-                taken_cards, metrics, draft_id, self._current_event_type
+                taken_cards,
+                metrics,
+                draft_id,
+                self._current_event_type,
+                getattr(self, "_current_event_set", ""),
             )
 
     def _build_active_state(self):
