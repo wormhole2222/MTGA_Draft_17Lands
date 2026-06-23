@@ -10,15 +10,27 @@ import threading
 from src import constants
 from src.ui.styles import Theme
 from src.utils import open_file
-from src.ui.components import ManaCurvePlot, TypePieChart
+from src.ui.components import ManaCurvePlot, TypePieChart, CardToolTip, AutoScrollbar
 from src.card_logic import get_deck_metrics, identify_top_pairs
+from collections import Counter
+from src.archetype_loader import (
+    archetype_file_exists,
+    load_archetypes,
+    get_archetype_counts,
+)
+from src.combo_loader import combo_file_exists, load_combos
 
 
 class DraftRecapScreen(ttk.Frame):
-    def __init__(self, parent, launch_sealed_callback=None):
+    def __init__(self, parent, launch_sealed_callback=None, configuration=None):
         super().__init__(parent)
         self.launch_sealed_callback = launch_sealed_callback
+        self.configuration = configuration
         self._dynamic_wrap_labels = []
+        self._recap_archetypes_data = None
+        self._recap_pool_names = []
+        self._recap_arch_set = None
+        self._recap_card_lookup = {}
         self._build_ui()
         self.bind("<Configure>", self._on_resize)
 
@@ -36,6 +48,32 @@ class DraftRecapScreen(ttk.Frame):
         setattr(self, text_var_name, lbl)
         self._dynamic_wrap_labels.append(lbl)
         return frame
+
+    def _make_scrolled_text(self, parent):
+        """Create a read-only, vertically scrollable Text filling `parent`.
+
+        Fonts and colors are applied centrally by _style_recap_text_widgets.
+        """
+        parent.rowconfigure(0, weight=1)
+        parent.columnconfigure(0, weight=1)
+        text = tkinter.Text(
+            parent,
+            wrap="word",
+            relief="flat",
+            borderwidth=0,
+            highlightthickness=0,
+            padx=Theme.scaled_val(4),
+            pady=Theme.scaled_val(4),
+        )
+        text.grid(row=0, column=0, sticky="nsew")
+        scroll = AutoScrollbar(parent, orient="vertical", command=text.yview)
+        scroll.grid(row=0, column=1, sticky="ns")
+        text.configure(yscrollcommand=scroll.set, state="disabled")
+        text.bind(
+            "<MouseWheel>",
+            lambda e: text.yview_scroll(int(-e.delta / 120), "units"),
+        )
+        return text
 
     def _build_ui(self):
         self.columnconfigure(0, weight=1)
@@ -175,7 +213,210 @@ class DraftRecapScreen(ttk.Frame):
             fill="both", expand=True, pady=Theme.scaled_val((0, 10))
         )
 
-    def update_summary(self, taken_cards, metrics, draft_id, event_type):
+        # --- TAB 4: ARCHETYPES & COMBOS ---
+        tab_ac = ttk.Frame(self.recap_notebook, padding=Theme.scaled_val(15))
+        self.recap_notebook.add(tab_ac, text=" 🃏 Archetypes & Combos ")
+        tab_ac.columnconfigure((0, 1), weight=1)
+        tab_ac.rowconfigure(0, weight=1)
+
+        # LEFT: archetype dropdown + breakdown
+        ac_left = ttk.Frame(tab_ac)
+        ac_left.grid(row=0, column=0, sticky="nsew", padx=Theme.scaled_val((0, 10)))
+        ac_left.columnconfigure(0, weight=1)
+        ac_left.rowconfigure(1, weight=1)
+
+        selector = ttk.Frame(ac_left)
+        selector.grid(row=0, column=0, sticky="ew", pady=Theme.scaled_val((0, 8)))
+        ttk.Label(selector, text="Archetype:", font=Theme.scaled_font(9)).pack(
+            side="left", padx=(0, Theme.scaled_val(6))
+        )
+        self.recap_arch_var = tkinter.StringVar(value="")
+        self.recap_arch_dropdown = ttk.Combobox(
+            selector, textvariable=self.recap_arch_var, state="readonly"
+        )
+        self.recap_arch_dropdown.pack(side="left", fill="x", expand=True)
+        self.recap_arch_dropdown.bind(
+            "<<ComboboxSelected>>", self._on_recap_archetype_change
+        )
+
+        arch_box = ttk.Labelframe(
+            ac_left, text="ARCHETYPE BREAKDOWN", padding=Theme.scaled_val(8)
+        )
+        arch_box.grid(row=1, column=0, sticky="nsew")
+        self.recap_archetype_text = self._make_scrolled_text(arch_box)
+
+        # RIGHT: scrollable list of assembled combos
+        combo_box = ttk.Labelframe(
+            tab_ac, text="COMBOS ASSEMBLED", padding=Theme.scaled_val(8)
+        )
+        combo_box.grid(row=0, column=1, sticky="nsew")
+        self.recap_combo_text = self._make_scrolled_text(combo_box)
+        self.recap_combo_text.bind("<Button-1>", self._on_recap_combo_click)
+        self.recap_combo_text.tag_bind(
+            "card", "<Enter>", lambda e: self.recap_combo_text.config(cursor="hand2")
+        )
+        self.recap_combo_text.tag_bind(
+            "card", "<Leave>", lambda e: self.recap_combo_text.config(cursor="")
+        )
+        self._style_recap_text_widgets()
+        self.bind_all("<<ThemeChanged>>", self._on_recap_theme_change, add="+")
+
+    def _style_recap_text_widgets(self):
+        """(Re)apply colors, fonts, and tags to the two recap Text widgets."""
+        try:
+            if (
+                getattr(self, "recap_archetype_text", None) is not None
+                and self.recap_archetype_text.winfo_exists()
+            ):
+                self.recap_archetype_text.configure(
+                    bg=Theme.BG_PRIMARY,
+                    fg=Theme.TEXT_MAIN,
+                    font=Theme.scaled_font(10),
+                )
+                self.recap_archetype_text.tag_configure(
+                    "cat", font=Theme.scaled_font(10, "bold")
+                )
+            if (
+                getattr(self, "recap_combo_text", None) is not None
+                and self.recap_combo_text.winfo_exists()
+            ):
+                self.recap_combo_text.configure(
+                    bg=Theme.BG_PRIMARY,
+                    fg=Theme.TEXT_MAIN,
+                    font=Theme.scaled_font(11),
+                )
+                self.recap_combo_text.tag_configure(
+                    "card",
+                    foreground=Theme.WARNING,
+                    font=Theme.scaled_font(11, "bold"),
+                )
+                self.recap_combo_text.tag_configure(
+                    "sep", font=Theme.scaled_font(11)
+                )
+        except tkinter.TclError:
+            pass
+
+    def _on_recap_theme_change(self, event=None):
+        self._style_recap_text_widgets()
+
+    def _on_recap_archetype_change(self, event=None):
+        self._render_recap_archetype_counts()
+
+    def _render_recap_archetype_counts(self):
+        txt = self.recap_archetype_text
+        txt.config(state="normal")
+        txt.delete("1.0", "end")
+        data = self._recap_archetypes_data
+        label = self.recap_arch_var.get()
+        key = (
+            next((k for k, v in data.items() if v.get("label") == label), None)
+            if data
+            else None
+        )
+        if not data:
+            txt.insert("end", "No archetype data for this set.")
+        elif key is not None:
+            counts = get_archetype_counts(key, self._recap_pool_names, data)
+            if not counts:
+                txt.insert("end", "No matching cards.")
+            else:
+                for entry in counts:
+                    txt.insert(
+                        "end", f"{entry['name']}: {entry['count']}\n", ("cat",)
+                    )
+                    matched = entry.get("matched_cards", {})
+                    for cname in sorted(matched):
+                        cnt = matched[cname]
+                        disp = f"{cname} x{cnt}" if cnt > 1 else cname
+                        txt.insert("end", f"    {disp}\n")
+                    txt.insert("end", "\n")
+        txt.config(state="disabled")
+
+    def _insert_recap_combo_side(self, present):
+        """Insert one side of a combo into the combos Text with gold card tags."""
+        txt = self.recap_combo_text
+        for i, (name, count) in enumerate(present):
+            if i > 0:
+                txt.insert("end", "/", ("sep",))
+            disp = f"{name} x{count}" if count > 1 else name
+            txt.insert("end", disp, ("card", f"cardname:{name}"))
+
+    def _on_recap_combo_click(self, event):
+        """Show the card-image popup for the combo card name that was clicked."""
+        if not self.configuration:
+            return
+        txt = self.recap_combo_text
+        index = txt.index(f"@{event.x},{event.y}")
+        name = next(
+            (
+                t[len("cardname:") :]
+                for t in txt.tag_names(index)
+                if t.startswith("cardname:")
+            ),
+            None,
+        )
+        card = self._recap_card_lookup.get(name) if name else None
+        if card:
+            scale = constants.UI_SIZE_DICT.get(
+                self.configuration.settings.ui_size, 1.0
+            )
+            CardToolTip.create(
+                txt, card, self.configuration.features.images_enabled, scale
+            )
+
+    def _update_archetypes_combos(self, taken_cards, set_code):
+        """Populate the Archetypes & Combos tab from the final pool."""
+        self._recap_pool_names = [c.get("name", "") for c in taken_cards]
+        self._recap_card_lookup = {c.get("name", ""): c for c in taken_cards}
+        pool_counts = Counter(self._recap_pool_names)
+
+        # Archetypes — only repopulate the dropdown when the set changes, so a
+        # refresh tick never resets the user's current selection.
+        self._recap_archetypes_data = (
+            load_archetypes(set_code)
+            if set_code and archetype_file_exists(set_code)
+            else None
+        )
+        if set_code != self._recap_arch_set:
+            self._recap_arch_set = set_code
+            if self._recap_archetypes_data:
+                labels = [v["label"] for v in self._recap_archetypes_data.values()]
+                self.recap_arch_dropdown.configure(values=labels, state="readonly")
+                self.recap_arch_var.set(labels[0] if labels else "")
+            else:
+                self.recap_arch_dropdown.configure(values=[], state="disabled")
+                self.recap_arch_var.set("")
+        self._render_recap_archetype_counts()
+
+        # Combos — every combo whose anchor and at least one partner are both in
+        # the pool. Both sides render in gold (the "card" tag); sides joined by an
+        # arrow, copies shown as xN.
+        combos = (
+            load_combos(set_code) if set_code and combo_file_exists(set_code) else []
+        )
+        assembled = []
+        for left, right in combos:
+            left_present = [(n, pool_counts[n]) for n in left if n in pool_counts]
+            right_present = [(n, pool_counts[n]) for n in right if n in pool_counts]
+            if left_present and right_present:
+                assembled.append((left_present, right_present))
+
+        txt = self.recap_combo_text
+        txt.config(state="normal")
+        txt.delete("1.0", "end")
+        if not combos:
+            txt.insert("end", "No combo data for this set.")
+        elif not assembled:
+            txt.insert("end", "No assembled combos in this pool.")
+        else:
+            for left_present, right_present in assembled:
+                self._insert_recap_combo_side(left_present)
+                txt.insert("end", "  →  ", ("sep",))
+                self._insert_recap_combo_side(right_present)
+                txt.insert("end", "\n")
+        txt.config(state="disabled")
+
+    def update_summary(self, taken_cards, metrics, draft_id, event_type, set_code=""):
         if not taken_cards or len(taken_cards) < 40:
             return
 
@@ -452,3 +693,6 @@ class DraftRecapScreen(ttk.Frame):
                     pass
 
             threading.Thread(target=fetch_17lands_record, daemon=True).start()
+
+        # 10. ARCHETYPES & COMBOS TAB
+        self._update_archetypes_combos(taken_cards, set_code)
