@@ -98,7 +98,7 @@ The application is structured into a collapsible Live Dashboard and several func
 - **Archetype Tracker:** A sidebar panel where you pick a target archetype from a dropdown and see live counts of the key cards you've drafted toward it (removal, fixing, payoffs, etc.). It also appears at the top of the Stats tab in **Mini Mode**. Each set has its own archetype definitions.
 
 ### Application Tabs
-- **Datasets:** Manage, download, and update 17Lands card data locally. Provides detailed download summaries, including exactly how many MTGA cards were successfully matched with 17Lands telemetry data.
+- **Datasets:** Manage, download, and update 17Lands card data locally. Provides detailed download summaries, including exactly how many MTGA cards were successfully matched with 17Lands telemetry data. Choose a **Time Period** (All Time, Latest Event, Last Week, etc.) to match 17Lands, and use **Clear Set History** to delete old downloaded datasets and re-sync a clean copy if loading slows down.
 - **Card Pool:** View the cards you have drafted. Features a **"Switch to Visual View"** button to stack your cards into mana curve columns exactly like MTG Arena does.
 - **Deck Builder:** A fully interactive deck construction environment combining Auto-Generation and manual Custom building. Features a 1-click **Auto-Lands** button, a sleek basics toolbar, and live deck size validation.
 - **Comparisons:** Search and add multiple cards to directly compare their stats side-by-side.

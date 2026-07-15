@@ -66,6 +66,65 @@ class TestDownloadPanel:
         assert panel.vars["start"].get() == "2023-12-01"
         assert panel.vars["event"].get() == "PremierDraft"
 
+    def test_resolve_start_date_prefers_set_info(self, root, mock_sets_data, config):
+        """A set with a real start date uses it directly."""
+        panel = DownloadWindow(root, mock_sets_data, config, MagicMock())
+        assert panel._resolve_start_date("Outlaws") == "2024-04-16"
+
+    def test_resolve_start_date_manifest_fallback(self, root, config):
+        """A set stuck on the placeholder date (e.g. stale set-list cache) falls
+        back to the earliest start_date in the synced dataset manifest."""
+        from src.constants import START_DATE_DEFAULT
+
+        sets_data = MagicMock(
+            data={
+                "Marvel Super Heroes": SetInfo(
+                    arena=["ALL"],
+                    seventeenlands=["MSH"],
+                    formats=[],
+                    set_code="MARVEL",
+                    start_date=START_DATE_DEFAULT,
+                ),
+            }
+        )
+        panel = DownloadWindow(root, sets_data, config, MagicMock())
+
+        manifest = {
+            "datasets": {
+                "MSH_PremierDraft_All": {"start_date": "2026-06-23"},
+                "MSH_TradDraft_All": {"start_date": "2026-06-24"},
+                "TMT_PremierDraft_All": {"start_date": "2026-03-03"},
+            }
+        }
+        with patch(
+            "src.ui.windows.download.read_local_manifest", return_value=manifest
+        ):
+            assert panel._resolve_start_date("Marvel Super Heroes") == "2026-06-23"
+
+    def test_resolve_start_date_placeholder_without_manifest(self, root, config):
+        """No real set date and no manifest entry: keep the placeholder."""
+        from src.constants import START_DATE_DEFAULT
+
+        sets_data = MagicMock(
+            data={
+                "Marvel Super Heroes": SetInfo(
+                    arena=["ALL"],
+                    seventeenlands=["MSH"],
+                    formats=[],
+                    set_code="MARVEL",
+                    start_date=START_DATE_DEFAULT,
+                ),
+            }
+        )
+        panel = DownloadWindow(root, sets_data, config, MagicMock())
+
+        with patch(
+            "src.ui.windows.download.read_local_manifest", return_value={}
+        ):
+            assert (
+                panel._resolve_start_date("Marvel Super Heroes") == START_DATE_DEFAULT
+            )
+
     def test_threshold_sanitization(self, root, mock_sets_data, config):
         panel = DownloadWindow(root, mock_sets_data, config, MagicMock())
         panel.vars["threshold"].set("abc")
@@ -176,6 +235,43 @@ class TestDownloadPanel:
 
             mock_remove.assert_called_once_with(target_file)
             mock_update.assert_called_once()
+
+    @patch("src.ui.windows.download.write_configuration")
+    @patch("src.utils.clear_set_history", return_value=3)
+    @patch("tkinter.messagebox.showinfo")
+    @patch("tkinter.messagebox.askyesno", return_value=True)
+    def test_clear_set_history_button(
+        self,
+        mock_ask,
+        mock_info,
+        mock_clear,
+        mock_write,
+        root,
+        mock_sets_data,
+        config,
+    ):
+        """Clear Set History wipes datasets and resets the version marker so the
+        next launch performs a fresh refresh."""
+        panel = DownloadWindow(root, mock_sets_data, config, MagicMock())
+
+        with patch.object(panel, "_update_table"):
+            panel._clear_set_history()
+
+        mock_clear.assert_called_once()
+        assert config.settings.last_run_version == ""
+        assert config.card_data.latest_dataset == ""
+        mock_write.assert_called_once()
+        mock_info.assert_called_once()
+
+    @patch("tkinter.messagebox.askyesno", return_value=False)
+    def test_clear_set_history_button_cancelled(
+        self, mock_ask, root, mock_sets_data, config
+    ):
+        """Declining the confirmation must not delete anything."""
+        panel = DownloadWindow(root, mock_sets_data, config, MagicMock())
+        with patch("src.utils.clear_set_history") as mock_clear:
+            panel._clear_set_history()
+            mock_clear.assert_not_called()
 
     @patch("tkinter.messagebox.showwarning")
     def test_delete_dataset_blocked_if_active(

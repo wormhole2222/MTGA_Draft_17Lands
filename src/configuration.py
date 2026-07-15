@@ -95,10 +95,15 @@ class Settings(BaseModel):
     update_notifications_enabled: bool = True
     missing_notifications_enabled: bool = True
     auto_sync_datasets: bool = True
+    show_splash_screen: bool = True
 
     # System Paths (Restored)
     arena_log_location: str = ""
     database_location: str = ""
+
+    # Tracks the app version of the last successful launch so we can run one-time
+    # migrations on upgrade (e.g. forcing a corrected-dataset refresh).
+    last_run_version: str = ""
 
     @field_validator("deck_filter")
     @classmethod

@@ -90,6 +90,73 @@ def test_retrieve_local_set_list_skip_old(mock_integrity, mock_listdir, mock_exi
     assert file_list == MOCKED_DATASETS_LIST_VALID
 
 
+@patch("src.utils.os.path.exists")
+@patch("src.utils.os.listdir")
+@patch("src.utils.check_file_integrity")
+def test_retrieve_local_set_list_custom_preset_label(
+    mock_integrity, mock_listdir, mock_exists
+):
+    """Custom datasets downloaded with a time_period preset must display the
+    preset label (e.g. 'All (Latest Event)') instead of the placeholder date
+    range, which no longer describes what was fetched."""
+    import src.utils
+
+    src.utils._LOCAL_SET_CACHE = {"mtime": 0.0, "files": []}
+
+    mock_exists.return_value = True
+    mock_listdir.return_value = ["MSH_ContenderDraft_All_Custom-LatestEvent-20260708_Data.json"]
+    mock_integrity.return_value = (
+        Result.VALID,
+        {
+            "meta": {
+                "version": 3.0,
+                "start_date": "2019-01-01",
+                "end_date": "2026-07-08",
+                "time_period": "LATEST_EVENT",
+                "collection_date": "2026-07-08 19:36:27.000000",
+            }
+        },
+    )
+
+    file_list, error_list = retrieve_local_set_list(["MSH"])
+
+    assert not error_list
+    assert len(file_list) == 1
+    assert file_list[0][2] == "All (Latest Event)"
+
+
+@patch("src.utils.os.path.exists")
+@patch("src.utils.os.listdir")
+@patch("src.utils.check_file_integrity")
+def test_retrieve_local_set_list_custom_legacy_date_label(
+    mock_integrity, mock_listdir, mock_exists
+):
+    """Older custom datasets without meta.time_period keep the date-range label."""
+    import src.utils
+
+    src.utils._LOCAL_SET_CACHE = {"mtime": 0.0, "files": []}
+
+    mock_exists.return_value = True
+    mock_listdir.return_value = ["OTJ_PremierDraft_All_Custom-20240416-20240503_Data.json"]
+    mock_integrity.return_value = (
+        Result.VALID,
+        {
+            "meta": {
+                "version": 2,
+                "start_date": "2024-04-16",
+                "end_date": "2024-05-03",
+                "collection_date": "2024-05-03 10:15:45.788070",
+            }
+        },
+    )
+
+    file_list, error_list = retrieve_local_set_list(["OTJ"])
+
+    assert not error_list
+    assert len(file_list) == 1
+    assert file_list[0][2] == "All (04/16-05/03)"
+
+
 @pytest.mark.parametrize(
     "input_color, expected_output",
     [
@@ -110,3 +177,48 @@ def test_normalize_color_string(input_color, expected_output):
     Verify that color strings are normalized to WUBRG order.
     """
     assert normalize_color_string(input_color) == expected_output
+
+
+def test_purge_raw_cache_removes_files(tmp_path, monkeypatch):
+    """The upgrade migration should clear stale raw-cache entries."""
+    import src.constants as constants_module
+    from src.utils import purge_raw_cache
+
+    monkeypatch.setattr(constants_module, "BASE_DIR", str(tmp_path))
+    cache_dir = tmp_path / "Temp" / "RawCache"
+    cache_dir.mkdir(parents=True)
+    (cache_dir / "otj_premierdraft_2024-01-01_2024-02-01_all_all.json").write_text("[]")
+    (cache_dir / "otj_premierdraft_2024-01-02_2024-02-02_wu_all.json").write_text("[]")
+
+    removed = purge_raw_cache()
+
+    assert removed == 2
+    assert list(cache_dir.iterdir()) == []
+
+
+def test_purge_raw_cache_missing_dir_is_safe(tmp_path, monkeypatch):
+    """A missing cache directory must not raise, just report nothing removed."""
+    import src.constants as constants_module
+    from src.utils import purge_raw_cache
+
+    monkeypatch.setattr(constants_module, "BASE_DIR", str(tmp_path))
+    assert purge_raw_cache() == 0
+
+
+def test_clear_set_history_removes_datasets(tmp_path, monkeypatch):
+    """Clearing set history deletes datasets and the manifest but leaves other files."""
+    import src.utils as utils_module
+    from src.utils import clear_set_history
+
+    monkeypatch.setattr(utils_module, "SETS_FOLDER", str(tmp_path))
+    (tmp_path / "MSH_PremierDraft_All_Data.json").write_text("{}")
+    (tmp_path / "BLB_QuickDraft_Top_Data.json").write_text("{}")
+    (tmp_path / "local_manifest.json").write_text("{}")
+    (tmp_path / "unrelated.txt").write_text("keep me")
+
+    removed = clear_set_history()
+
+    assert removed == 2
+    assert not (tmp_path / "MSH_PremierDraft_All_Data.json").exists()
+    assert not (tmp_path / "local_manifest.json").exists()
+    assert (tmp_path / "unrelated.txt").exists()

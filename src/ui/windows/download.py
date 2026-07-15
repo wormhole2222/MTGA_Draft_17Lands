@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from src import constants
 from src.configuration import write_configuration
 from src.file_extractor import FileExtractor
-from src.utils import retrieve_local_set_list
+from src.utils import retrieve_local_set_list, read_local_manifest
 from src.ui.components import DynamicTreeviewManager, AutoScrollbar
 from src.ui.styles import Theme
 
@@ -24,6 +24,7 @@ class DatasetArgs:
     user_group: str
     game_count: int
     color_ratings: Optional[dict] = None
+    time_period: str = constants.TIME_PERIOD_DEFAULT
 
 
 class DownloadWindow(ttk.Frame):
@@ -99,14 +100,7 @@ class DownloadWindow(ttk.Frame):
         set_options = list(self.sets_data.keys())
         active_set_codes = []
 
-        try:
-            manifest_path = os.path.join(constants.SETS_FOLDER, "local_manifest.json")
-            if os.path.exists(manifest_path):
-                with open(manifest_path, "r", encoding="utf-8") as f:
-                    manifest_data = json.load(f)
-                    active_set_codes = manifest_data.get("active_sets", [])
-        except Exception:
-            pass
+        active_set_codes = read_local_manifest().get("active_sets", [])
 
         active_options = []
         inactive_options = []
@@ -209,27 +203,40 @@ class DownloadWindow(ttk.Frame):
             row=1, column=3, sticky="ew", pady=Theme.scaled_val(2)
         )
 
+        # 17Lands replaced custom start/end date ranges with time_period presets.
+        # We still track start/end internally (set-start -> today) for the dataset
+        # meta and the table, but the user now picks a preset instead.
         self.vars["start"] = tkinter.StringVar(value="2019-01-01")
-        ttk.Label(form, text="START DATE:").grid(
+        self.vars["end"] = tkinter.StringVar(value=str(date.today()))
+
+        self.vars["period"] = tkinter.StringVar(
+            value=constants.TIME_PERIOD_DEFAULT_LABEL
+        )
+        ttk.Label(form, text="TIME PERIOD:").grid(
             row=2, column=0, sticky="e", padx=Theme.scaled_val(5)
         )
-        ttk.Entry(form, textvariable=self.vars["start"]).grid(
-            row=2, column=1, sticky="ew", pady=Theme.scaled_val(2)
-        )
-
-        self.vars["end"] = tkinter.StringVar(value=str(date.today()))
-        ttk.Label(form, text="END DATE:").grid(
-            row=2, column=2, sticky="e", padx=Theme.scaled_val(5)
-        )
-        ttk.Entry(form, textvariable=self.vars["end"]).grid(
-            row=2, column=3, sticky="ew", pady=Theme.scaled_val(2)
-        )
+        ttk.OptionMenu(
+            form,
+            self.vars["period"],
+            constants.TIME_PERIOD_DEFAULT_LABEL,
+            *constants.TIME_PERIOD_LABELS,
+        ).grid(row=2, column=1, sticky="ew", pady=Theme.scaled_val(2))
 
         self.btn_dl = ttk.Button(
             form, text="Download Selected Dataset", command=self._manual_download
         )
         self.btn_dl.grid(
             row=3, column=0, columnspan=4, pady=Theme.scaled_val((10, 0)), sticky="ew"
+        )
+
+        self.btn_clear = ttk.Button(
+            form,
+            text="Clear Set History",
+            command=self._clear_set_history,
+            bootstyle="secondary",
+        )
+        self.btn_clear.grid(
+            row=4, column=0, columnspan=4, pady=Theme.scaled_val((5, 0)), sticky="ew"
         )
 
         self.progress = ttk.Progressbar(container, mode="determinate")
@@ -324,11 +331,59 @@ class DownloadWindow(ttk.Frame):
             self.vars["group"].set(args.user_group)
             self.vars["start"].set(args.start)
             self.vars["end"].set(args.end)
+            self.vars["period"].set(constants.time_period_label(args.time_period))
             self.update_idletasks()
             self._start_download(args)
 
     def _manual_download(self):
         self._start_download()
+
+    def _resolve_start_date(self, set_key: str) -> str:
+        """Best-known start date for a set. The set list can be stuck on the
+        placeholder default (stale cache, 17Lands feed gap), so fall back to
+        the earliest start_date the synced dataset manifest records for it."""
+        s_info = self.sets_data.get(set_key)
+        if s_info and s_info.start_date != constants.START_DATE_DEFAULT:
+            return s_info.start_date
+
+        codes = {c.upper() for c in (s_info.seventeenlands if s_info else [])}
+        manifest_dates = [
+            entry["start_date"]
+            for key, entry in read_local_manifest().get("datasets", {}).items()
+            if key.split("_")[0].upper() in codes and entry.get("start_date")
+        ]
+        if manifest_dates:
+            return min(manifest_dates)
+
+        return self.vars["start"].get()
+
+    def _clear_set_history(self):
+        """Deletes all locally downloaded datasets and schedules a fresh refresh on
+        the next launch's splash screen. Useful when accumulated old sets slow
+        loading or after a data-format change."""
+        if not messagebox.askyesno(
+            "Clear Set History",
+            "Delete all downloaded datasets?\n\nThe latest 17Lands data will be "
+            "re-downloaded automatically the next time you start the app.",
+        ):
+            return
+
+        from src.utils import clear_set_history
+
+        removed = clear_set_history()
+
+        # The active dataset file may now be gone, and resetting the version marker
+        # makes the next launch perform the one-time corrected-data refresh.
+        self.configuration.card_data.latest_dataset = ""
+        self.configuration.settings.last_run_version = ""
+        write_configuration(self.configuration)
+
+        self._update_table()
+        messagebox.showinfo(
+            "Set History Cleared",
+            f"Removed {removed} dataset(s). Restart the app to download fresh "
+            "17Lands data.",
+        )
 
     def _on_set_change(self, val):
         s_info = self.sets_data.get(val)
@@ -399,8 +454,9 @@ class DownloadWindow(ttk.Frame):
         ctx = {
             "set_key": self.vars["set"].get(),
             "event": self.vars["event"].get(),
-            "start": self.vars["start"].get(),
+            "start": self._resolve_start_date(self.vars["set"].get()),
             "end": self.vars["end"].get(),
+            "time_period": constants.time_period_value(self.vars["period"].get()),
             "group": self.vars["group"].get(),
             "db_loc": self.configuration.settings.database_location,
             "threshold": threshold,
@@ -429,6 +485,7 @@ class DownloadWindow(ttk.Frame):
             ex.set_draft_type(ctx["event"])
             ex.set_start_date(ctx["start"])
             ex.set_end_date(ctx["end"])
+            ex.set_time_period(ctx["time_period"])
             ex.set_user_group(ctx["group"])
             ex.set_version(3.0)
             suc = True

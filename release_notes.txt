@@ -1,8 +1,36 @@
+===================== RELEASE NOTES 4.19-jr =====================
+* wormhole2222: [Merge] Synced the fork with upstream 4.19. This brings the AI deck suggester fixes (always offers a one/two-color deck, no longer recommends cards with no 17Lands data, corrected mana bases), the 17Lands `/api/card_data` migration (fixes stats limited to a single day and empty win rates), and the Scryfall tooltip artwork fix. See the 4.19 / 4.18 / 4.17 notes below for details.
+* wormhole2222: [Set Data] Added two more MSH two-card combos: Hawkeye, Young Avenger + Mjölnir, Hammer of Thor; and Baxter Building + Nick Fury, Agent of S.H.I.E.L.D. / Thanos, the Mad Titan.
+* wormhole2222: [Feature] Two Card Combo Alerts sidebar panel — flags when a card in the live pack combos with one already in your pool, using per-set definitions in the Combos folder.
+* wormhole2222: [Feature] Archetype Tracker sidebar panel (also pinned to the top of the Mini Mode Stats tab) — pick a target archetype to see live counts of the key cards you've drafted toward it.
+* wormhole2222: [Feature] "Archetypes & Combos" tab on the post-draft recap screen — per-archetype card breakdowns plus the two-card combos you assembled (click a card to view its image), for both draft and sealed.
+* wormhole2222: [Set Data] Archetype and two-card combo definitions for **MSH (Marvel's Super Heroes)** and **SOS**.
+* wormhole2222: [Bug] Fixed Arena qualifier *drafts* being misclassified as Sealed, which previously hid the pack/pick view.
+
 ===================== RELEASE NOTES 4.16-jr2 =====================
 * wormhole2222: [Feature] Added Two Card Combo Alerts sidebar panel. Detects when a card in the live pack combos with a card already in your pool and highlights it, using per-set combo definitions in the Combos folder.
 * wormhole2222: [Feature] Added Archetype Tracker sidebar panel (also pinned to the top of the Mini Mode Stats tab). Select a target archetype from a dropdown to see live counts of the key cards you've drafted toward it, using per-set definitions in the Archetypes folder.
 * wormhole2222: [Bug] Fixed Arena qualifier *drafts* being misclassified as Sealed by the event detector, which previously hid the pack/pick view.
 * wormhole2222: [Set Data] Added archetype and two-card combo definitions for **SOS**.
+
+===================== RELEASE NOTES 4.19 =====================
+* unrealities: [Bug] Fixed Contender Drafts not being recognized during live drafting (#187). The scanner never ran its pack/pick parsers for Contender events, so no pack suggestions appeared and the deck builder saw zero picks until the initial deck was submitted. Contender Drafts are now handled like the other human live draft formats.
+* unrealities: [Bug] Fixed the AI deck suggester generating broken mana bases. One-shot fixers (e.g. Treasure makers) were counted as full permanent any-color sources, which could leave splash colors with zero lands (e.g. one Island under five blue spells); basics are now allocated to every color the deck actually plays.
+* unrealities: [Bug] The AI deck suggester now always offers at least one single- or dual-color deck. A deck built in two colors with a single off-color card from a gold/5-color card was mistakenly treated as multicolor and dropped, leaving only "soupy" 3+ color suggestions; color identity now ignores incidental one-off splash pips.
+* unrealities: [Bug] The deck suggester no longer plays cards that have no 17Lands data in an established set (e.g. unplayable cards nobody drafts). Such cards were being scored from a metadata heuristic meant only for a set's first day and could end up recommended.
+* unrealities: [UX/UI] Manual downloads are now labeled with their Time Period preset (e.g. "All (Latest Event)") in the Datasets table instead of a placeholder date range, record the set's true start date, and no longer overwrite each other when different presets are downloaded on the same day.
+
+===================== RELEASE NOTES 4.18 =====================
+* unrealities: [Bug] Fixed a major issue where 17Lands card and color statistics only reflected the most recent day of data (e.g. ~500 games instead of the full set). The tool now requests the correct "All Time" period, matching the numbers shown on 17Lands.
+* unrealities: [Bug] Migrated card statistics to 17Lands' new `/api/card_data` endpoint. The retired endpoint had stopped honoring the color archetype and time period filters, which made every archetype display identical "All Decks" numbers and left win rates empty in some formats.
+* unrealities: [UX/UI] The dataset download screen now offers a Time Period drop-down (All Time, Latest Event, Last Week, etc.) in place of manual start/end dates, mirroring 17Lands.
+* unrealities: [UX/UI] On first launch after updating, the app performs a one-time refresh of the corrected 17Lands datasets and clears the stale local cache automatically.
+
+===================== RELEASE NOTES 4.17 =====================
+* unrealities: [Feature] Added a toggle in Preferences to completely disable the Splash Screen on startup for users who prefer a silent background load (#179).
+* unrealities: [Bug] Fixed an issue where card tooltips failed to download artwork due to new Scryfall API security requirements rejecting requests without User-Agent headers (#182).
+* unrealities: [UX/UI] Added an "Image Unavailable" visual fallback to card tooltips. This also prevents a bug where the tooltip window would occasionally get stuck at the top-left corner of the monitor if an image download failed.
+* unrealities: [UX/UI] Fixed an issue on Linux where the Splash Screen spawned as an unmanaged window. Linux users can now properly move or minimize the splash screen while datasets download in the background.
 
 ===================== RELEASE NOTES 4.16 =====================
 * unrealities: [Feature] Added full support for **Contender Draft**, MTG Arena's new high-stakes Best-of-1 Limited format.

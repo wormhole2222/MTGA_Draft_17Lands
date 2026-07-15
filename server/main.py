@@ -16,6 +16,7 @@ from server.extract import (
     extract_basic_lands,
 )
 from server.transform import transform_payload
+from server.validate import validate_dataset, enough_history_to_enforce
 from server.load import save_dataset, save_manifest, save_report, deploy_web_assets
 from server.report import PipelineReport
 
@@ -100,6 +101,9 @@ def run_pipeline():
 
     jobs = []
     for set_code, data in active_sets.items():
+        # The date range no longer drives the 17Lands request (it uses a
+        # time_period preset now), but we still record the true start date in
+        # each dataset's meta so the UI can show the window being represented.
         if "CUBE" in set_code.upper():
             true_start_date_str = data["start_date"]
         else:
@@ -118,6 +122,11 @@ def run_pipeline():
 
     for set_code, draft_format, user_group, start_date_str in jobs:
         logger.info(f"==== Processing {set_code} | {draft_format} | {user_group} ====")
+        time_period = config.default_time_period(set_code)
+        logger.info(
+            f"   Requesting 17Lands time_period={time_period} "
+            f"(represents {start_date_str} -> {end_date_str})"
+        )
 
         try:
             if basic_lands_mem is None:
@@ -153,7 +162,7 @@ def run_pipeline():
                 )
 
             color_ratings, games_played, total_games = extract_color_ratings(
-                client, set_code, draft_format, user_group, start_date_str, end_date_str
+                client, set_code, draft_format, user_group, time_period
             )
 
             valid_archetypes = ["All Decks"]
@@ -180,8 +189,7 @@ def run_pipeline():
                 draft_format,
                 valid_archetypes,
                 user_group,
-                start_date_str,
-                end_date_str,
+                time_period,
             )
 
             if not seventeenlands_data.get("All Decks"):
@@ -215,6 +223,35 @@ def run_pipeline():
                 end_date_str,
                 total_games,
             )
+
+            label = f"{set_code} {draft_format} ({user_group})"
+            warnings_found, critical_issues = validate_dataset(
+                set_code, draft_format, user_group, final_dataset, total_games
+            )
+            for msg in warnings_found:
+                logger.warning(f"   [Validation] {label}: {msg}")
+
+            if critical_issues and enough_history_to_enforce(
+                start_date_str, end_date_str
+            ):
+                # Mature set with clearly broken data: do NOT overwrite the
+                # previously published file -- the old (good) dataset keeps serving.
+                for msg in critical_issues:
+                    logger.error(f"   [Validation] {label}: {msg}")
+                report.record_skipped(
+                    set_code,
+                    draft_format,
+                    f"Failed validation, kept prior data: {critical_issues[0]}",
+                )
+                continue
+            elif critical_issues:
+                # Too early in the set's life to trust the signal -- publish anyway
+                # but keep it visible in the report.
+                for msg in critical_issues:
+                    logger.warning(
+                        f"   [Validation] {label}: {msg} "
+                        f"(< {config.VALIDATION_ENFORCE_MIN_DAYS}d of data; publishing anyway)"
+                    )
 
             file_info = save_dataset(set_code, draft_format, user_group, final_dataset)
             file_info["start_date"] = start_date_str

@@ -31,9 +31,9 @@ def get_resource_dir():
 BASE_DIR = get_base_dir()
 RESOURCE_DIR = get_resource_dir()
 
-APPLICATION_VERSION = "4.16-jr2"
-OLD_APPLICATION_VERSION = "4.16-jr2"
-PREVIOUS_APPLICATION_VERSION = "0415"
+APPLICATION_VERSION = "4.19-jr"
+OLD_APPLICATION_VERSION = "4.17"
+PREVIOUS_APPLICATION_VERSION = "0418"
 
 FONT_SANS_SERIF = "Arial"
 FONT_MONO_SPACE = "Courier"
@@ -86,6 +86,7 @@ LIMITED_TYPE_SEALED_TRADITIONAL = 6
 LIMITED_TYPE_DRAFT_PICK_TWO = 7
 LIMITED_TYPE_DRAFT_PICK_TWO_TRAD = 8
 LIMITED_TYPE_DRAFT_PICK_TWO_QUICK = 9
+LIMITED_TYPE_DRAFT_CONTENDER = 10
 
 DATA_FIELD_17LANDS_OHWR = "opening_hand_win_rate"
 DATA_FIELD_17LANDS_NGOH = "opening_hand_game_count"
@@ -469,6 +470,37 @@ LIMITED_GROUPS_LIST = [
     LIMITED_USER_GROUP_BOTTOM,
 ]
 
+# 17Lands replaced custom start_date/end_date ranges with these preset
+# "time_period" values (the drop-down on the card pages). Maps the UI label to
+# the query value the endpoint expects; confirm against the browser Network tab
+# if a preset ever stops returning data.
+TIME_PERIOD_OPTIONS = {
+    "All Time": "ALL_TIME",
+    "Latest Event": "LATEST_EVENT",
+    "Last Two Weeks": "LAST_TWO_WEEKS",
+    "Last Week": "LAST_WEEK",
+    "Last Day": "LAST_DAY",
+    "First Week": "FIRST_WEEK",
+    "All Except First Week": "ALL_EXCEPT_FIRST_WEEK",
+}
+TIME_PERIOD_LABELS = list(TIME_PERIOD_OPTIONS.keys())
+TIME_PERIOD_DEFAULT_LABEL = "All Time"
+TIME_PERIOD_DEFAULT = "ALL_TIME"
+
+
+def time_period_value(label: str) -> str:
+    """UI label -> 17Lands query value, falling back to All Time."""
+    return TIME_PERIOD_OPTIONS.get(label, TIME_PERIOD_DEFAULT)
+
+
+def time_period_label(value: str) -> str:
+    """17Lands query value -> UI label, falling back to All Time."""
+    for lbl, val in TIME_PERIOD_OPTIONS.items():
+        if val == value:
+            return lbl
+    return TIME_PERIOD_DEFAULT_LABEL
+
+
 SET_TYPE_EXPANSION = "expansion"
 SET_TYPE_ALCHEMY = "alchemy"
 SET_TYPE_MASTERS = "masters"
@@ -570,7 +602,7 @@ LIMITED_TYPES_DICT = {
     LIMITED_TYPE_STRING_DRAFT_PICK_TWO: LIMITED_TYPE_DRAFT_PICK_TWO,
     LIMITED_TYPE_STRING_DRAFT_PICK_TWO_TRAD: LIMITED_TYPE_DRAFT_PICK_TWO_TRAD,
     LIMITED_TYPE_STRING_DRAFT_PICK_TWO_QUICK: LIMITED_TYPE_DRAFT_PICK_TWO_QUICK,
-    LIMITED_TYPE_STRING_DRAFT_CONTENDER: LIMITED_TYPE_STRING_DRAFT_CONTENDER,
+    LIMITED_TYPE_STRING_DRAFT_CONTENDER: LIMITED_TYPE_DRAFT_CONTENDER,
 }
 
 COLOR_NAMES_DICT = {
