@@ -5,7 +5,7 @@ Super Intelligence / Monica Rambeau // Photon, Living Light|Atlantis Attacks|Spe
 
 Ronin, Shadow Stalker / Stolen Stark Tech|Super Suit
 
-Hawkeye, Young Avenger / Avengers Disassembled|Bullseye, Death Dealer|Hawkeye's Bow|Human Torch, Johnny Storm|Photon Blast Barrage
+Hawkeye, Young Avenger / Avengers Disassembled|Bullseye, Death Dealer|Hawkeye's Bow|Human Torch, Johnny Storm|Photon Blast Barrage|Mjölnir, Hammer of Thor
 
 Photon Blast Barrage / Red Hulk
 
@@ -30,3 +30,5 @@ Widow's Bite / Iron Fist, Living Weapon|The Serpent Society
 Super-Adaptoid / Take Up the Shield|Hercules, Prince of Power
 
 Mister Hyde, Monster Within / Thunderbolts Conspiracy|The Astonishing Ant-Man|Kid Loki
+
+Baxter Building / Nick Fury, Agent of S.H.I.E.L.D.|Thanos, the Mad Titan
