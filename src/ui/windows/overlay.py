@@ -167,8 +167,11 @@ class CompactOverlay(tb.Toplevel):
         self.notebook.add(self.tab_pool, text=" Pool ")
 
         # 1. Pack Tab (Dynamic Grid)
+        # Row 0: pack table (stretches). Row 1: seen-cards wheel (weighted dynamically).
+        # Row 2: two-card combo alerts at the bottom (natural height, hidden until alerts).
         self.tab_pack.columnconfigure(0, weight=1)
         self.tab_pack.rowconfigure(0, weight=1)
+        self.tab_pack.rowconfigure(2, weight=0)
 
         # Pack Table
         self.pack_frame = tb.Frame(self.tab_pack)
@@ -220,11 +223,13 @@ class CompactOverlay(tb.Toplevel):
         )
         self.advisor_panel.pack(fill=BOTH, expand=True, anchor="n", side="top")
 
+        # Two Card Combo alerts live at the BOTTOM of the Pack tab (row 2), mirroring
+        # how they sit beneath the Advisor content. Hidden until alerts exist.
         self.combo_panel = TwoCardComboPanel(
-            self.tab_advisor,
+            self.tab_pack,
             self.configuration,
         )
-        self.combo_panel.pack_forget()  # Hidden until there are alerts
+        self.combo_panel.grid_remove()
 
         # 4. Stats Tab
         # Archetype tracker is created lazily by show_archetype_panel() and inserted
@@ -428,10 +433,16 @@ class CompactOverlay(tb.Toplevel):
 
         alerts = combo_alerts or []
         if alerts:
-            self.combo_panel.pack(fill="x", pady=(0, Theme.scaled_val(10)), side="top")
+            self.combo_panel.grid(
+                row=2,
+                column=0,
+                sticky="ew",
+                padx=Theme.scaled_val(2),
+                pady=(Theme.scaled_val(6), 0),
+            )
             self.combo_panel.update_alerts(alerts)
         else:
-            self.combo_panel.pack_forget()
+            self.combo_panel.grid_remove()
 
         if taken_cards:
             deck_metrics = get_deck_metrics(taken_cards)
