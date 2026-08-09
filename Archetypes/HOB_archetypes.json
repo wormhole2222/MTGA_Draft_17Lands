@@ -1,0 +1,547 @@
+{
+  "none": {
+    "label": "None",
+    "colors": null,
+    "categories": [
+      {
+        "name": "Removal",
+        "cards": [
+          "Azog, Moria's Ruin",
+          "Bilbo's Deadly Slice",
+          "Bolg of the North",
+          "Burn, Burn, Tree and Fern",
+          "Celebrate the Mountain-king",
+          "Crude Bent Blade",
+          "Desolation of Smaug",
+          "Enchanted River's Grasp",
+          "Front Porch Sentries",
+          "Giant's Boulder",
+          "Glóin the Mighty",
+          "Gnashing of Teeth",
+          "Magnificent End",
+          "Pinecone Strike",
+          "Quarrel",
+          "Settle the Wreckage",
+          "Smaug, the Great Calamity",
+          "Stir Up Trouble",
+          "Stone by Sunlight",
+          "Stone-Giant of High Pass",
+          "The Black Arrow",
+          "Thorin's Last Stand",
+          "Thorin, Mountain-king",
+          "Troll Negotiations",
+          "Uneasy Partings",
+          "Warg Tactics"
+        ]
+      },
+      {
+        "name": "Fixing",
+        "cards": [
+          "Bejeweled Warg",
+          "Bolg's Company",
+          "Dori, Bearer of Friends",
+          "Down in the Valley",
+          "Elven Passage",
+          "Elvenking's Halls",
+          "Giant's Boulder",
+          "Gleaming Splendor",
+          "Goblin-town",
+          "Hobbit Hole",
+          "Iron Hills",
+          "Lake-town",
+          "Last Light of Durin's Day",
+          "Long-Bodied Grey Dog",
+          "Mirkwood",
+          "Old Thrush",
+          "Orcrist, Goblin-cleaver",
+          "Roads Go Ever, Ever On",
+          "Smaug the Magnificent",
+          "Smaug, Wicked Worm",
+          "The Misty Mountains Cold",
+          "The Sackville-Bagginses",
+          "Through the Forest Gate",
+          "Thrór's Map",
+          "Troop of Ponies",
+          "Wood Elves",
+          "Woodland Weavemaster"
+        ]
+      }
+    ]
+  },
+  "rw_dwarves": {
+    "label": "R/W Dwarves/Equipment/Enduring Story",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "categories": [
+      {
+        "name": "Dwarves",
+        "cards": [
+          "An Unexpected Party",
+          "Balin, Loremaster",
+          "Bifur, Melodic Rider",
+          "Bofur, Reliable Guardian",
+          "Bombur, Gentle Dreamer",
+          "Dori, Bearer of Friends",
+          "Dwalin, Weaponmaster",
+          "Dwarven Mauler",
+          "Dwarven Provisioner",
+          "Dwarven Shortsword",
+          "Dáin Ironfoot",
+          "Dáin's Company",
+          "Dáin, Lord of the Iron Hills",
+          "Fíli the Pathfinder",
+          "Glóin the Mighty",
+          "Iron Hills Blacksmith",
+          "Iron Hills Stalwart",
+          "Kíli the Resourceful",
+          "Nori, Teller of Tales",
+          "Ori, Keeper of Songs",
+          "The Lonely Mountain",
+          "Thorin Oakenshield",
+          "Thorin, Mountain-king",
+          "Óin the Brave"
+        ]
+      },
+      {
+        "name": "Dwarf Payoffs",
+        "cards": [
+          "An Unexpected Party",
+          "Balin, Loremaster",
+          "Bifur, Melodic Rider",
+          "Dwarven Mattock",
+          "Dáin's Company",
+          "Fíli the Pathfinder",
+          "Iron Hills",
+          "Kíli the Resourceful",
+          "Vow to Erebor"
+        ]
+      },
+      {
+        "name": "Equipment",
+        "cards": [
+          "Crude Bent Blade",
+          "Dwarven Mattock",
+          "Dwarven Shortsword",
+          "Glamdring, Foe-hammer",
+          "Goblin Plate Mail",
+          "Iron Hills Blacksmith",
+          "My Precious",
+          "Orcrist, Goblin-cleaver",
+          "Ragged Short Spear",
+          "Sting, Bilbo's Sword",
+          "The Black Arrow",
+          "Well-Worn Spatula",
+          "Wizard's Staff"
+        ]
+      },
+      {
+        "name": "Equipment Payoffs",
+        "cards": [
+          "Dwalin, Weaponmaster",
+          "Dáin Ironfoot",
+          "Dáin's Company",
+          "Iron Hills Blacksmith",
+          "Kíli the Resourceful",
+          "The Lonely Mountain",
+          "Thorin, Mountain-king",
+          "Vow to Erebor"
+        ]
+      },
+      {
+        "name": "Storied cards",
+        "cards": [
+          "Balin, Loremaster",
+          "Bifur, Melodic Rider",
+          "Bombur, Gentle Dreamer",
+          "Dáin, Lord of the Iron Hills",
+          "Fíli the Pathfinder",
+          "Kíli the Resourceful",
+          "Ori, Keeper of Songs",
+          "Thorin Oakenshield",
+          "Óin the Brave"
+        ]
+      },
+      {
+        "name": "Enduring Story triggers",
+        "cards": [
+          "Azog, Moria's Ruin",
+          "Balin, Loremaster",
+          "Bard the Bowman",
+          "Bard, King of Dale",
+          "Belladonna Took",
+          "Beorn the Fierce",
+          "Beorn, Reluctant Host",
+          "Bifur, Melodic Rider",
+          "Bilbo Baggins, Burglar",
+          "Bilbo, Luckwearer",
+          "Bilbo, Thief in the Night",
+          "Bofur, Reliable Guardian",
+          "Bolg of the North",
+          "Bombur, Gentle Dreamer",
+          "Burn, Burn, Tree and Fern",
+          "Crude Bent Blade",
+          "Dori, Bearer of Friends",
+          "Down in the Valley",
+          "Down, Down to Goblin-town",
+          "Dwalin, Weaponmaster",
+          "Dwarven Mattock",
+          "Dwarven Shortsword",
+          "Dáin Ironfoot",
+          "Dáin, Lord of the Iron Hills",
+          "Elrond, Moon-Reader",
+          "Fíli the Pathfinder",
+          "Galion, Elvenking's Butler",
+          "Gandalf, Goblins' Bane",
+          "Gandalf, Spark Starter",
+          "Gandalf, Wandering Wizard",
+          "Getaway Barrel",
+          "Giant's Boulder",
+          "Glamdring, Foe-hammer",
+          "Glóin the Mighty",
+          "Goblin Plate Mail",
+          "Gollum the Abandoned",
+          "Gollum, Riddle Master",
+          "Gollum, Silent Slinker",
+          "Great Gilded Boat",
+          "Key to the Side-Door",
+          "Kíli the Resourceful",
+          "My Precious",
+          "Nori, Teller of Tales",
+          "Old Fat Spider Can't See Me",
+          "Orcrist, Goblin-cleaver",
+          "Ori, Keeper of Songs",
+          "Radagast of Rhosgobel",
+          "Ragged Short Spear",
+          "Roads Go Ever, Ever On",
+          "Roll-Roll-Roll-Roll",
+          "Smaug the Magnificent",
+          "Smaug, the Great Calamity",
+          "Smaug, Wicked Worm",
+          "Sting, Bilbo's Sword",
+          "The Arkenstone",
+          "The Black Arrow",
+          "The Chief Warg",
+          "The Great Goblin",
+          "The Lord of the Eagles",
+          "The Master of Lake-town",
+          "The Misty Mountains Cold",
+          "The Mountain-king's Return",
+          "The Notary Hobbits",
+          "The Queen of Dale",
+          "The Sackville-Bagginses",
+          "Thorin Oakenshield",
+          "Thorin, Mountain-king",
+          "Thranduil, Sindarin Liege",
+          "Thranduil, the Elvenking",
+          "Thrór's Map",
+          "Tom, Bert, and William",
+          "Well-Worn Spatula",
+          "Wizard's Staff",
+          "Óin the Brave"
+        ]
+      }
+    ]
+  },
+  "uw_drawtwo": {
+    "label": "U/W Draw Two",
+    "colors": [
+      "U",
+      "W"
+    ],
+    "categories": [
+      {
+        "name": "Draw Two/Recruit cards",
+        "cards": [
+          "Azog, Moria's Ruin",
+          "Balin, Loremaster",
+          "Bard's Company",
+          "Belladonna Took",
+          "Beorn the Fierce",
+          "Bilbo Baggins, Burglar",
+          "Bilbo, Luckwearer",
+          "Celebrate the Mountain-king",
+          "Confusticate and Bebother",
+          "Elrond, Moon-Reader",
+          "Esgaroth Garrison",
+          "Fateful Discovery",
+          "Gandalf, Wandering Wizard",
+          "Gollum, Riddle Master",
+          "Great Gilded Boat",
+          "Key to the Side-Door",
+          "Kíli the Resourceful",
+          "Lake-town Lookout",
+          "Long Lake Nuisance",
+          "My Precious",
+          "Old Fat Spider",
+          "Old Fat Spider Can't See Me",
+          "Patient Instructor",
+          "Plunder the Trollshaws",
+          "Rage into the Valley",
+          "Ragged Short Spear",
+          "Reverent Howl",
+          "Silvan Reveler",
+          "Smaug, Wicked Worm",
+          "Sound the Trumpets",
+          "The Arkenstone",
+          "The Chief Warg",
+          "The Master of Lake-town",
+          "The Mountain-king's Return",
+          "The Queen of Dale",
+          "The Sackville-Bagginses",
+          "Thranduil, the Elvenking",
+          "Thrór's Map",
+          "Tom, Bert, and William",
+          "Uncover the Moon-Letters",
+          "Óin the Brave"
+        ]
+      },
+      {
+        "name": "Draw Two Payoffs",
+        "cards": [
+          "Bard the Bowman",
+          "Bard, King of Dale",
+          "Gleaming Splendor",
+          "Lakeshore Apothecary",
+          "Master's Councillors",
+          "Ravenhill Flock"
+        ]
+      }
+    ]
+  },
+  "gu_elves": {
+    "label": "G/U Elves/Landfall",
+    "colors": [
+      "G",
+      "U"
+    ],
+    "categories": [
+      {
+        "name": "Elves",
+        "cards": [
+          "Boughside Wanderers",
+          "Cantankerous Keepers",
+          "Elrond, Moon-Reader",
+          "Elven Raft-Steerer",
+          "Elvenking's Harper",
+          "Galion, Elvenking's Butler",
+          "Guardian of the Halls",
+          "Mirkwood Meditator",
+          "Mirkwood Nurturer",
+          "Mirkwood Pathmaker",
+          "Silvan Reveler",
+          "Thranduil's Company",
+          "Thranduil, Sindarin Liege",
+          "Thranduil, the Elvenking",
+          "Wood Elves",
+          "Woodland Weavemaster"
+        ]
+      },
+      {
+        "name": "Elf Payoffs",
+        "cards": [
+          "Cantankerous Keepers",
+          "Down in the Valley",
+          "Elven Passage",
+          "Elvenking's Halls",
+          "Thranduil's Company",
+          "Thranduil, Sindarin Liege",
+          "Thranduil, the Elvenking",
+          "Woodland Weavemaster"
+        ]
+      },
+      {
+        "name": "Landfall cards",
+        "cards": [
+          "Attercop",
+          "Beorn's Hospitality",
+          "Boughside Wanderers",
+          "Dancing from Dark to Dawn",
+          "Down in the Valley",
+          "Elven Raft-Steerer",
+          "Mirkwood Meditator",
+          "Silvan Reveler",
+          "Thranduil's Company",
+          "Thranduil, Sindarin Liege"
+        ]
+      },
+      {
+        "name": "Ways to draw extra cards",
+        "cards": [
+          "Azog, Moria's Ruin",
+          "Balin, Loremaster",
+          "Bard's Company",
+          "Belladonna Took",
+          "Beorn the Fierce",
+          "Bilbo Baggins, Burglar",
+          "Bilbo, Luckwearer",
+          "Celebrate the Mountain-king",
+          "Confusticate and Bebother",
+          "Elrond, Moon-Reader",
+          "Esgaroth Garrison",
+          "Fateful Discovery",
+          "Gandalf, Goblins' Bane",
+          "Gandalf, Wandering Wizard",
+          "Gollum, Riddle Master",
+          "Great Gilded Boat",
+          "Gundabad Opportunist",
+          "Inside Information",
+          "Key to the Side-Door",
+          "Kíli the Resourceful",
+          "Lake-town Lookout",
+          "Long Lake Nuisance",
+          "My Precious",
+          "Old Fat Spider",
+          "Old Fat Spider Can't See Me",
+          "Patient Instructor",
+          "Plunder the Trollshaws",
+          "Rage into the Valley",
+          "Ragged Short Spear",
+          "Reverent Howl",
+          "Silvan Reveler",
+          "Smaug, Wicked Worm",
+          "Snowslope Hunter",
+          "Sound the Trumpets",
+          "The Arkenstone",
+          "The Chief Warg",
+          "The Great Goblin",
+          "The Master of Lake-town",
+          "The Mountain-king's Return",
+          "The Queen of Dale",
+          "The Sackville-Bagginses",
+          "Thranduil, the Elvenking",
+          "Thrór's Map",
+          "Tom, Bert, and William",
+          "Uncover the Moon-Letters",
+          "Óin the Brave"
+        ]
+      },
+      {
+        "name": "Ways to fetch/play lands",
+        "cards": [
+          "Beorn, Reluctant Host",
+          "Boughside Wanderers",
+          "Down in the Valley",
+          "Elven Passage",
+          "Hobbit Hole",
+          "Old Thrush",
+          "Silvan Reveler",
+          "Thranduil's Company",
+          "Thranduil, Sindarin Liege",
+          "Through the Forest Gate",
+          "Thrór's Map",
+          "Troop of Ponies"
+        ]
+      }
+    ]
+  },
+  "br_sacrifice": {
+    "label": "B/R Sacrifice",
+    "colors": [
+      "B",
+      "R"
+    ],
+    "categories": [
+      {
+        "name": "Sacrifice outlets",
+        "cards": [
+          "Bolg of the North",
+          "Bolg's Company",
+          "Gollum the Abandoned",
+          "My Precious",
+          "Rhovanion Rampager",
+          "Snowslope Hunter",
+          "Stir Up Trouble",
+          "The Sackville-Bagginses",
+          "Tom, Bert, and William"
+        ]
+      },
+      {
+        "name": "Good sacrifice targets",
+        "cards": [
+          "Along the Crooked Way",
+          "Bejeweled Warg",
+          "Bothersome Noisemaker",
+          "Dori, Bearer of Friends",
+          "Down in the Valley",
+          "Down, Down to Goblin-town",
+          "Dáin Ironfoot",
+          "Fearsome Goblin Pair",
+          "Goblin Plate Mail",
+          "Goblin-town Flunkies",
+          "Iron Hills Blacksmith",
+          "Lake-town Lookout",
+          "Long-Bodied Grey Dog",
+          "Smaug, Wicked Worm",
+          "The Misty Mountains Cold",
+          "The Notary Hobbits",
+          "The Sackville-Bagginses",
+          "Thranduil, Sindarin Liege",
+          "Tidings of War"
+        ]
+      }
+    ]
+  },
+  "bg_ferocious": {
+    "label": "B/G Ferocious",
+    "colors": [
+      "B",
+      "G"
+    ],
+    "categories": [
+      {
+        "name": "Ferocious Payoffs",
+        "cards": [
+          "Nasty Little Rabbit",
+          "Nighthowl Pursuer",
+          "Ravening Warg",
+          "The Chief Warg",
+          "Wargling",
+          "Wilderland Scrounger"
+        ]
+      },
+      {
+        "name": "Creatures power 4+",
+        "cards": [
+          "Balin, Loremaster",
+          "Beorn the Fierce",
+          "Beorn, Reluctant Host",
+          "Bifur, Melodic Rider",
+          "Bolg of the North",
+          "Bombur, Gentle Dreamer",
+          "Boughside Wanderers",
+          "Cantankerous Keepers",
+          "Chief Warg's Company",
+          "Dreaded Bat-Cloud",
+          "Duskwatch Hunter",
+          "Galion, Elvenking's Butler",
+          "Gandalf, Spark Starter",
+          "Gandalf, Wandering Wizard",
+          "Gigantic Big Bear",
+          "Glóin the Mighty",
+          "Gollum, Silent Slinker",
+          "Great Gilded Boat",
+          "Great Ugly-Looking Goblin",
+          "Gundabad Opportunist",
+          "Head of the Hunt",
+          "Iron Hills Stalwart",
+          "Lake-town Mariners",
+          "Large Bear",
+          "Mirkwood Nurturer",
+          "Misty Mountains Raider",
+          "Old Fat Spider",
+          "Ordinary Bear",
+          "Smaug the Magnificent",
+          "Smaug, the Great Calamity",
+          "Smaug, Wicked Worm",
+          "Stone-Giant of High Pass",
+          "The Eagles Are Coming!",
+          "The Lord of the Eagles",
+          "Thranduil, the Elvenking",
+          "Tom, Bert, and William"
+        ]
+      }
+    ]
+  }
+}
