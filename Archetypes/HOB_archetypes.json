@@ -140,9 +140,11 @@
         "name": "Equipment Payoffs",
         "cards": [
           "Dwalin, Weaponmaster",
+          "Dwarven Mauler",
           "Dáin Ironfoot",
           "Dáin's Company",
           "Iron Hills Blacksmith",
+          "Iron Hills Stalwart",
           "Kíli the Resourceful",
           "The Lonely Mountain",
           "Thorin, Mountain-king",
@@ -170,6 +172,7 @@
           "Balin, Loremaster",
           "Bard the Bowman",
           "Bard, King of Dale",
+          "Bejeweled Warg",
           "Belladonna Took",
           "Beorn the Fierce",
           "Beorn, Reluctant Host",
@@ -207,6 +210,7 @@
           "Great Gilded Boat",
           "Key to the Side-Door",
           "Kíli the Resourceful",
+          "Long-Bodied Grey Dog",
           "My Precious",
           "Nori, Teller of Tales",
           "Old Fat Spider Can't See Me",
@@ -302,7 +306,6 @@
         "cards": [
           "Bard the Bowman",
           "Bard, King of Dale",
-          "Gleaming Splendor",
           "Lakeshore Apothecary",
           "Master's Councillors",
           "Ravenhill Flock"
@@ -361,6 +364,7 @@
           "Down in the Valley",
           "Elven Raft-Steerer",
           "Mirkwood Meditator",
+          "Mirkwood Pathmaker",
           "Silvan Reveler",
           "Thranduil's Company",
           "Thranduil, Sindarin Liege"
@@ -431,7 +435,8 @@
           "Thranduil, Sindarin Liege",
           "Through the Forest Gate",
           "Thrór's Map",
-          "Troop of Ponies"
+          "Troop of Ponies",
+          "Wood Elves"
         ]
       }
     ]
@@ -453,6 +458,7 @@
           "Rhovanion Rampager",
           "Snowslope Hunter",
           "Stir Up Trouble",
+          "Stone-Giant of High Pass",
           "The Sackville-Bagginses",
           "Tom, Bert, and William"
         ]
@@ -461,21 +467,34 @@
         "name": "Good sacrifice targets",
         "cards": [
           "Along the Crooked Way",
+          "Bard's Company",
           "Bejeweled Warg",
           "Bothersome Noisemaker",
+          "Celebrate the Mountain-king",
+          "Crude Bent Blade",
           "Dori, Bearer of Friends",
           "Down in the Valley",
           "Down, Down to Goblin-town",
           "Dáin Ironfoot",
+          "Esgaroth Garrison",
           "Fearsome Goblin Pair",
+          "Front Porch Sentries",
           "Goblin Plate Mail",
           "Goblin-town Flunkies",
+          "Great Gilded Boat",
           "Iron Hills Blacksmith",
           "Lake-town Lookout",
+          "Long Lake Nuisance",
           "Long-Bodied Grey Dog",
+          "Patient Instructor",
+          "Ragged Short Spear",
           "Smaug, Wicked Worm",
+          "Sound the Trumpets",
+          "Stony-Voiced Goblins",
           "The Misty Mountains Cold",
+          "The Mountain-king's Return",
           "The Notary Hobbits",
+          "The Queen of Dale",
           "The Sackville-Bagginses",
           "Thranduil, Sindarin Liege",
           "Tidings of War"
@@ -513,6 +532,7 @@
           "Boughside Wanderers",
           "Cantankerous Keepers",
           "Chief Warg's Company",
+          "Desolation Prowler",
           "Dreaded Bat-Cloud",
           "Duskwatch Hunter",
           "Galion, Elvenking's Butler",
