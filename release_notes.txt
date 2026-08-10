@@ -1,11 +1,9 @@
 ===================== RELEASE NOTES 4.19-jr =====================
-* wormhole2222: [Merge] Synced the fork with upstream 4.19. This brings the AI deck suggester fixes (always offers a one/two-color deck, no longer recommends cards with no 17Lands data, corrected mana bases), the 17Lands `/api/card_data` migration (fixes stats limited to a single day and empty win rates), and the Scryfall tooltip artwork fix. See the 4.19 / 4.18 / 4.17 notes below for details.
-* wormhole2222: [Set Data] Added two more MSH two-card combos: Hawkeye, Young Avenger + Mjölnir, Hammer of Thor; and Baxter Building + Nick Fury, Agent of S.H.I.E.L.D. / Thanos, the Mad Titan.
-* wormhole2222: [Feature] Two Card Combo Alerts sidebar panel — flags when a card in the live pack combos with one already in your pool, using per-set definitions in the Combos folder.
-* wormhole2222: [Feature] Archetype Tracker sidebar panel (also pinned to the top of the Mini Mode Stats tab) — pick a target archetype to see live counts of the key cards you've drafted toward it.
-* wormhole2222: [Feature] "Archetypes & Combos" tab on the post-draft recap screen — per-archetype card breakdowns plus the two-card combos you assembled (click a card to view its image), for both draft and sealed.
-* wormhole2222: [Set Data] Archetype and two-card combo definitions for **MSH (Marvel's Super Heroes)** and **SOS**.
-* wormhole2222: [Bug] Fixed Arena qualifier *drafts* being misclassified as Sealed, which previously hid the pack/pick view.
+* wormhole2222: [Merge] Synced the fork with upstream 4.19 (AI deck-suggester fixes, the 17Lands `/api/card_data` migration that fixes single-day/empty stats, and the Scryfall tooltip fix). See the 4.19 / 4.18 / 4.17 notes below.
+* wormhole2222: [Set Data] Added HOB (The Hobbit): all five draft archetypes plus a Removal/Fixing tracker, and an initial set of two-card combos.
+* wormhole2222: [Set Data] Added two more MSH combos (Hawkeye, Young Avenger + Mjölnir, Hammer of Thor; Baxter Building + Nick Fury / Thanos).
+* wormhole2222: [Bug] Fixed MSH double-faced/adventure cards being stored as "Front // Back", which stopped the combo and archetype matchers from ever recognizing them; they now use the front-face name.
+* wormhole2222: [UX/UI] Moved the Two Card Combo Alerts panel to the bottom of the Pack tab in Mini Mode, so combos show up next to the pack you're picking from.
 
 ===================== RELEASE NOTES 4.16-jr2 =====================
 * wormhole2222: [Feature] Added Two Card Combo Alerts sidebar panel. Detects when a card in the live pack combos with a card already in your pool and highlights it, using per-set combo definitions in the Combos folder.
