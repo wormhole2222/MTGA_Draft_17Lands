@@ -245,6 +245,47 @@
           "Wizard's Staff",
           "Óin the Brave"
         ]
+      },
+      {
+        "name": "Go wide cards",
+        "cards": [
+          "An Unexpected Party",
+          "Bard's Company",
+          "Bothersome Noisemaker",
+          "Celebrate the Mountain-king",
+          "Chief Warg's Company",
+          "Dancing from Dark to Dawn",
+          "Down in the Valley",
+          "Esgaroth Garrison",
+          "Fíli the Pathfinder",
+          "Goblin-town Flunkies",
+          "Great Gilded Boat",
+          "Head of the Hunt",
+          "Lake-town Lookout",
+          "Long Lake Nuisance",
+          "Misty Mountains Raider",
+          "Part in Friendship",
+          "Patient Instructor",
+          "The Lonely Mountain",
+          "The Mountain-king's Return",
+          "The Notary Hobbits",
+          "The Queen of Dale",
+          "Thranduil, Sindarin Liege"
+        ]
+      },
+      {
+        "name": "Go wide payoffs",
+        "cards": [
+          "An Unexpected Party",
+          "Bard's Company",
+          "Desert Were-Worm",
+          "Dwarven Provisioner",
+          "Esgaroth Garrison",
+          "Fíli the Pathfinder",
+          "The Arkenstone",
+          "The Eagles Are Coming!",
+          "Thorin's Last Stand"
+        ]
       }
     ]
   },
@@ -271,6 +312,7 @@
           "Esgaroth Garrison",
           "Fateful Discovery",
           "Gandalf, Wandering Wizard",
+          "Gleaming Splendor",
           "Gollum, Riddle Master",
           "Great Gilded Boat",
           "Key to the Side-Door",
@@ -309,6 +351,47 @@
           "Lakeshore Apothecary",
           "Master's Councillors",
           "Ravenhill Flock"
+        ]
+      },
+      {
+        "name": "Go wide cards",
+        "cards": [
+          "An Unexpected Party",
+          "Bard's Company",
+          "Bothersome Noisemaker",
+          "Celebrate the Mountain-king",
+          "Chief Warg's Company",
+          "Dancing from Dark to Dawn",
+          "Down in the Valley",
+          "Esgaroth Garrison",
+          "Fíli the Pathfinder",
+          "Goblin-town Flunkies",
+          "Great Gilded Boat",
+          "Head of the Hunt",
+          "Lake-town Lookout",
+          "Long Lake Nuisance",
+          "Misty Mountains Raider",
+          "Part in Friendship",
+          "Patient Instructor",
+          "The Lonely Mountain",
+          "The Mountain-king's Return",
+          "The Notary Hobbits",
+          "The Queen of Dale",
+          "Thranduil, Sindarin Liege"
+        ]
+      },
+      {
+        "name": "Go wide payoffs",
+        "cards": [
+          "An Unexpected Party",
+          "Bard's Company",
+          "Desert Were-Worm",
+          "Dwarven Provisioner",
+          "Esgaroth Garrison",
+          "Fíli the Pathfinder",
+          "The Arkenstone",
+          "The Eagles Are Coming!",
+          "Thorin's Last Stand"
         ]
       }
     ]
@@ -387,6 +470,7 @@
           "Fateful Discovery",
           "Gandalf, Goblins' Bane",
           "Gandalf, Wandering Wizard",
+          "Gleaming Splendor",
           "Gollum, Riddle Master",
           "Great Gilded Boat",
           "Gundabad Opportunist",
