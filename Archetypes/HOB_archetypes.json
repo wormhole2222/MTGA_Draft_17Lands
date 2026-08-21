@@ -14,7 +14,6 @@
           "Crude Bent Blade",
           "Desolation of Smaug",
           "Enchanted River's Grasp",
-          "Front Porch Sentries",
           "Gandalf, Spark Starter",
           "Giant's Boulder",
           "Glóin the Mighty",
@@ -29,7 +28,6 @@
           "Stone by Sunlight",
           "Stone-Giant of High Pass",
           "The Black Arrow",
-          "Thorin's Last Stand",
           "Thorin, Mountain-king",
           "Troll Negotiations",
           "Uneasy Partings",
@@ -301,6 +299,96 @@
     ],
     "categories": [
       {
+        "name": "Draw a Card",
+        "cards": [
+          "Belladonna Took",
+          "Bilbo Baggins, Burglar",
+          "Bilbo, Luckwearer",
+          "Confusticate and Bebother",
+          "Elrond, Moon-Reader",
+          "Fateful Discovery",
+          "Gandalf, Wandering Wizard",
+          "Gleaming Splendor",
+          "Key to the Side-Door",
+          "Kíli the Resourceful",
+          "Old Fat Spider Can't See Me",
+          "Plunder the Trollshaws",
+          "The Arkenstone",
+          "Thrór's Map",
+          "Uncover the Moon-Letters"
+        ]
+      },
+      {
+        "name": "Recruit Card",
+        "cards": [
+          "Bard's Company",
+          "Celebrate the Mountain-king",
+          "Esgaroth Garrison",
+          "Great Gilded Boat",
+          "Lake-town Lookout",
+          "Long Lake Nuisance",
+          "Patient Instructor",
+          "Sound the Trumpets",
+          "The Mountain-king's Return",
+          "The Queen of Dale"
+        ]
+      },
+      {
+        "name": "Draw Two Payoff",
+        "cards": [
+          "Bard the Bowman",
+          "Bard, King of Dale",
+          "Lake-town Toymaker",
+          "Lakeshore Apothecary",
+          "Master's Councillors",
+          "Ravenhill Flock"
+        ]
+      },
+      {
+        "name": "Nonland Recruit Discards",
+        "cards": [
+          "Eagle's Rescue",
+          "Moment of Glory",
+          "Plunder the Trollshaws"
+        ]
+      },
+      {
+        "name": "Go Wide Payoffs",
+        "cards": [
+          "An Unexpected Party",
+          "Bard's Company",
+          "Dwarven Provisioner",
+          "Eagle of the Great Shelf",
+          "Esgaroth Garrison",
+          "Fíli the Pathfinder",
+          "Moment of Glory",
+          "The Arkenstone",
+          "The Eagles Are Coming!",
+          "Thorin's Last Stand"
+        ]
+      },
+      {
+        "name": "Removal",
+        "cards": [
+          "Celebrate the Mountain-king",
+          "Enchanted River's Grasp",
+          "Giant's Boulder",
+          "Magnificent End",
+          "Settle the Wreckage",
+          "Stone by Sunlight",
+          "The Black Arrow",
+          "Uneasy Partings"
+        ]
+      }
+    ]
+  },
+  "ux_drawtwo_splash": {
+    "label": "U/X Draw two splashing",
+    "colors": [
+      "U"
+    ],
+    "categories": [
+      {
         "name": "Draw Two/Recruit cards",
         "cards": [
           "Azog, Moria's Ruin",
@@ -356,6 +444,15 @@
           "Lakeshore Apothecary",
           "Master's Councillors",
           "Ravenhill Flock"
+        ]
+      },
+      {
+        "name": "Nonland Recruit Discards",
+        "cards": [
+          "Eagle's Rescue",
+          "Moment of Glory",
+          "Plunder the Trollshaws",
+          "Tidings of War"
         ]
       },
       {
