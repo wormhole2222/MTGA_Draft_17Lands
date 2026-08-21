@@ -1,6 +1,6 @@
 # System Overview & Architecture
 
-**Status:** Active | **Current Version:** 4.19-jr | **Target:** Architecture Specification
+**Status:** Active | **Current Version:** 4.20-jr | **Target:** Architecture Specification
 
 ## 1. Introduction
 
