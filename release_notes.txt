@@ -1,3 +1,8 @@
+===================== RELEASE NOTES 4.21-jr =====================
+* wormhole2222: [Bug] Fixed Arena Opens with the new "Limited Open" event naming (e.g. HOBLimitedOpen_Draft1) not being recognized, which left the overlay with no dataset, pick ratings, archetype tracker, or combo alerts for the entire draft. The set code is now read directly from the event name, so it works for Draft 1 and Draft 2 and for any set, not just the newest one.
+* wormhole2222: [Bug] Fixed the cached set list overriding newly added event-detection rules until the cache expired.
+* wormhole2222: [UX/UI] HOB: capitalized the "U/X Draw Two splashing" archetype label.
+
 ===================== RELEASE NOTES 4.20-jr =====================
 * wormhole2222: [Set Data] Cleaned up the HOB archetype categories, and added a strict Blue/White archetype alongside a more general Blue/X splash archetype.
 
