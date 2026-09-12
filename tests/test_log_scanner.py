@@ -19,6 +19,7 @@ from tests.test_log_scanner_data import (
     OTJ_TRAD_DRAFT_ENTRIES_2024_5_7,
     DSK_SEALED_ENTRIES_2024_9_24,
     ARENA_OPEN_TEST_ENTRIES,
+    LIMITED_OPEN_TEST_ENTRIES,
     DSK_SEALED_NAVIGATION_ENTRY,
     CONSECUTIVE_DRAFT_ENTRIES,
     OM1_PICK_TWO_PREMIER_DRAFT_ENTRIES,
@@ -222,6 +223,17 @@ def test_arena_open(function_scanner, entry_label, expected, entry_string):
     event_test_cases(
         function_scanner,
         "Arena Open",
+        entry_label,
+        expected,
+        entry_string,
+    )
+
+
+@pytest.mark.parametrize("entry_label, expected, entry_string", LIMITED_OPEN_TEST_ENTRIES)
+def test_limited_open(function_scanner, entry_label, expected, entry_string):
+    event_test_cases(
+        function_scanner,
+        "Limited Open",
         entry_label,
         expected,
         entry_string,

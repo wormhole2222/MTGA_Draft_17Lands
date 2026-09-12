@@ -6,7 +6,12 @@ Data container for test_log_scanner.py to reduce file bloat.
 import os
 from dataclasses import dataclass, field
 from typing import List
-from src.limited_sets import SetDictionary, SetInfo, SpecialEvent
+from src.limited_sets import (
+    SetDictionary,
+    SetInfo,
+    SpecialEvent,
+    REPLACE_PHRASE_EVENT_PREFIX,
+)
 
 
 @dataclass
@@ -56,6 +61,18 @@ TEST_SETS = SetDictionary(
             type="PremierDraft",
             set_code="OTJ",
             keywords=["ArenaOpen", "Day2"],
+        ),
+        SpecialEvent(
+            label="OpenDraft1",
+            type="PremierDraft",
+            set_code=REPLACE_PHRASE_EVENT_PREFIX,
+            keywords=["LimitedOpen", "Draft1"],
+        ),
+        SpecialEvent(
+            label="OpenDraft2",
+            type="PremierDraft",
+            set_code=REPLACE_PHRASE_EVENT_PREFIX,
+            keywords=["LimitedOpen", "Draft2"],
         ),
         SpecialEvent(
             label="QualSealed", type="Sealed", set_code="MKM", keywords=["Qualifier"]
@@ -1149,6 +1166,39 @@ ARENA_OPEN_TEST_ENTRIES = [
         "Arena Direct Event Start",
         EventResults(new_event=True, current_set="OTJ", current_event="Sealed"),
         r'[UnityCrossThreadLogger]==> Event_Join {"id":"57d3b2c6-71ef-44ee-a395-1e977fcdd6b6","request":"{\"EventName\":\"ArenaDirect_OTJ_Sealed_20240726\",\"EntryCurrencyType\":\"Gem\",\"EntryCurrencyPaid\":1500,\"CustomTokenId\":null}"}',
+    ),
+]
+
+# Newer "Limited Open" naming, captured from a real HOB Arena Open (Sep 2026):
+# one event window with two drafts, the second unlocked by qualifying in the
+# first. Note the inconsistent underscore: Draft 1 is "LimitedOpen_Draft1",
+# Draft 2 is "LimitedOpenDraft2". The set code is glued to the front of the first token,
+# so without a special-event rule the standard parser resolves the set as UNKN
+# (unless that set happens to be in the set list already) and the app loads no
+# dataset or archetype/combo data for the whole draft. The set is read from the
+# prefix, so HOB resolves even though it isn't in TEST_SETS, and an Open on an
+# older set (MKM) resolves to that set rather than to the latest one.
+LIMITED_OPEN_TEST_ENTRIES = [
+    (
+        "Draft1 Event Start",
+        EventResults(new_event=True, current_set="HOB", current_event="OpenDraft1"),
+        r'[UnityCrossThreadLogger]==> Event_Join {"id":"266f2b1e-ab7f-46c9-b33a-7cc27c86a59a","request":"{\"EventName\":\"HOBLimitedOpen_Draft1_20260911\",\"EntryCurrencyType\":\"Gem\",\"EntryCurrencyPaid\":5000,\"CustomTokenId\":null}"}',
+    ),
+    (
+        "Draft2 Event Start",
+        EventResults(new_event=True, current_set="HOB", current_event="OpenDraft2"),
+        r'[UnityCrossThreadLogger]==> Event_Join {"id":"266f2b1e-ab7f-46c9-b33a-7cc27c86a59a","request":"{\"EventName\":\"HOBLimitedOpenDraft2_20260911\",\"EntryCurrencyType\":\"Gem\",\"EntryCurrencyPaid\":0,\"CustomTokenId\":\"Token_HOBLimitedOpenDraft2_20260911\"}"}',
+    ),
+    (
+        "Older Set Open Start",
+        EventResults(new_event=True, current_set="MKM", current_event="OpenDraft1"),
+        r'[UnityCrossThreadLogger]==> Event_Join {"id":"266f2b1e-ab7f-46c9-b33a-7cc27c86a59a","request":"{\"EventName\":\"MKMLimitedOpen_Draft1_20270101\",\"EntryCurrencyType\":\"Gem\",\"EntryCurrencyPaid\":5000,\"CustomTokenId\":null}"}',
+    ),
+    (
+        # No set code in front: must not guess the latest set.
+        "Missing Prefix Open Start",
+        EventResults(new_event=True, current_set="UNKN", current_event="OpenDraft1"),
+        r'[UnityCrossThreadLogger]==> Event_Join {"id":"266f2b1e-ab7f-46c9-b33a-7cc27c86a59a","request":"{\"EventName\":\"LimitedOpen_Draft1_20270101\",\"EntryCurrencyType\":\"Gem\",\"EntryCurrencyPaid\":5000,\"CustomTokenId\":null}"}',
     ),
 ]
 

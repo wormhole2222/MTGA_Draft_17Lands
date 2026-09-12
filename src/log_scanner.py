@@ -15,6 +15,7 @@ from enum import Enum
 from datetime import datetime
 
 import src.constants as constants
+from src.limited_sets import REPLACE_PHRASE_EVENT_PREFIX
 from src.logger import create_logger
 from src.set_metrics import SetMetrics
 from src.dataset import Dataset
@@ -437,14 +438,31 @@ class ArenaScanner:
                     if constants.PICK_TWO_EVENT_STRING in event_name
                     else event.number_of_players
                 )
+                set_code = event.set_code
+                if set_code == REPLACE_PHRASE_EVENT_PREFIX:
+                    set_code = self.__event_prefix_set_code(
+                        event_name, event.keywords[0]
+                    )
                 return (
                     True,
                     event.type,
                     event.label[:12],
-                    [event.set_code],
+                    [set_code],
                     number_of_players,
                 )
         return False, "", "", "", 8
+
+    def __event_prefix_set_code(self, event_name, keyword):
+        """Set code glued to the front of an event name (HOBLimitedOpen_... -> HOB).
+
+        Deliberately does not guess the latest set when the prefix is missing or
+        malformed: a wrong set silently loads the wrong card data, whereas UNKN
+        visibly loads nothing.
+        """
+        prefix = event_name[: event_name.find(keyword)].strip("_").upper()
+        if 3 <= len(prefix) <= 4 and prefix.isalnum():
+            return prefix
+        return "UNKN"
 
     def __check_standard_event(self, event_name):
         event_match = False

@@ -34,6 +34,9 @@ TEMP_LIMITED_SETS = os.path.join(TEMP_FOLDER, "temp_set_list.json")
 
 REPLACE_PHRASE_LATEST = "{LATEST}"
 REPLACE_PHRASE_DATE_SHIFT = "{DATESHIFT}"
+# Resolved per event by the scanner: the set code glued to the front of the
+# event name (HOBLimitedOpen_... -> HOB). Never guesses; UNKN if unparseable.
+REPLACE_PHRASE_EVENT_PREFIX = "{PREFIX}"
 START_DATE_DEFAULT = "2019-01-01"
 
 # Headers to prevent HTTP 400/403 errors from Scryfall/17Lands
@@ -79,6 +82,27 @@ class SetDictionary(BaseModel):
             type="PremierDraft",
             set_code=REPLACE_PHRASE_LATEST,
             keywords=["ArenaOpen", "Day2"],
+        ),
+        # Newer "Limited Open" naming: one event window with two drafts, the
+        # second unlocked by qualifying in the first (HOBLimitedOpen_Draft1_...
+        # and HOBLimitedOpenDraft2_...). The set code is glued to the front of
+        # the first token, so the standard parser can't isolate it unless that
+        # set is already in the set list. Keywords are substring-matched against
+        # the whole name, so the inconsistent underscore before "Draft" doesn't
+        # matter. The set is read from the prefix rather than assumed to be the
+        # latest, so an Open on an older set (e.g. MKMLimitedOpen_...) still
+        # resolves correctly.
+        SpecialEvent(
+            label="OpenDraft1",
+            type="PremierDraft",
+            set_code=REPLACE_PHRASE_EVENT_PREFIX,
+            keywords=["LimitedOpen", "Draft1"],
+        ),
+        SpecialEvent(
+            label="OpenDraft2",
+            type="PremierDraft",
+            set_code=REPLACE_PHRASE_EVENT_PREFIX,
+            keywords=["LimitedOpen", "Draft2"],
         ),
         # QualDraft must be listed before QualSealed. A qualifier *draft* event
         # name contains both "Qualifier" and "Draft", so it also satisfies the
@@ -127,6 +151,10 @@ class LimitedSets:
         if self._is_cache_valid():
             logger.info("Using cached set list.")
             self.limited_sets, _ = self.read_sets_file()
+            # special_events are code-defined matching rules, not fetched data,
+            # but they get serialized into the cache. Always take the current
+            # defaults so a stale cache can't mask newly added rules.
+            self.limited_sets.special_events = SetDictionary().special_events
             self.__substitute_strings()
             return self.limited_sets
 
