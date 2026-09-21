@@ -21,21 +21,10 @@ def _safe_setlocale(category, loc=None):
 locale.setlocale = _safe_setlocale
 
 import ttkbootstrap as ttk
-from ttkbootstrap.localization import msgs
 
-# Intercept TclErrors thrown by ttkbootstrap's localization engine on systems with outdated/missing msgcat Tcl packages.
-# This prevents a fatal crash on startup (e.g., invalid command name "::msgcat::mcmset") and allows the app to launch normally.
-_orig_initialize_localities = msgs.initialize_localities
-
-
-def _safe_initialize_localities(*args, **kwargs):
-    try:
-        _orig_initialize_localities(*args, **kwargs)
-    except Exception:
-        pass
-
-
-msgs.initialize_localities = _safe_initialize_localities
+# The ttkbootstrap msgcat guard (Tcl 9 startup crash) lives in src.ui.styles so
+# that every entry point constructing a Style is protected, not just this one.
+# It is installed as a side effect of the src.ui imports below.
 
 import argparse
 import os
@@ -76,13 +65,20 @@ def load_data(args, config, progress_callback):
         log_path = search_arena_log_locations(
             args.file,  # Manual override
             config.settings.arena_log_location,  # Stored fallback
+            config_pinned=config.settings.arena_log_pinned,
         )
 
         if log_path:
             logger.info(f"Using log file: {log_path}")
-            config.settings.arena_log_location = log_path
-            # Persist the valid path immediately
-            write_configuration(config)
+            # Persist the discovered path, but never overwrite a user-pinned
+            # location (it may be temporarily unavailable, e.g. an unmounted
+            # drive, and must survive until the user changes it in Settings).
+            if (
+                not config.settings.arena_log_pinned
+                and config.settings.arena_log_location != log_path
+            ):
+                config.settings.arena_log_location = log_path
+                write_configuration(config)
 
         # 2. GAME FILE INDEXING
         progress_callback("Checking Game Files...")
