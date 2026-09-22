@@ -1,0 +1,379 @@
+{
+  "none": {
+    "label": "None",
+    "colors": null,
+    "categories": [
+      {
+        "name": "Removal",
+        "cards": []
+      },
+      {
+        "name": "Fixing",
+        "cards": []
+      }
+    ]
+  },
+  "uw_surveil": {
+    "label": "U/W Surveil Aggro",
+    "colors": [
+      "U",
+      "W"
+    ],
+    "categories": [
+      {
+        "name": "Surveil Payoffs",
+        "cards": [
+          "Denzilore Fatehold",
+          "Desperate Futurescribe",
+          "Diviner of Victory",
+          "Proctor of Potential",
+          "Proft, Consulting Detective",
+          "Prudent Fateseer",
+          "Saheeli, Consul of Oversight",
+          "Surveillance Phantasm"
+        ]
+      },
+      {
+        "name": "Surveil Cards/Empower Jace",
+        "cards": [
+          "Academic Ascent",
+          "Campus Crier",
+          "Chandra, Chill of Compliance",
+          "Countersculpt",
+          "Diviner of Victory",
+          "Enlightened Confidant",
+          "Eye of Jace",
+          "Fatehold Charm",
+          "Fatehold Chronologist",
+          "Hexhaven Battalion",
+          "Jace's Machinations",
+          "Jace, Reality Sculptor",
+          "Keeper of the Quiet Hour",
+          "Mindseeker Oculus",
+          "Plan for All Outcomes",
+          "Proctor of Potential",
+          "Protege's Awakening",
+          "Prudent Fateseer",
+          "Refute Destiny",
+          "Repurposed Enforcer",
+          "Semester Foreseer",
+          "Surveillance Phantasm",
+          "Theorist's Proxy",
+          "Theorist's Sanctum",
+          "Way of the Cryomancer",
+          "Way of the Healer",
+          "Way of the Mentor",
+          "Way of the Mind Sculptor",
+          "Your Fate Ends Here",
+          "Yuriko, Hope from the Shadows"
+        ]
+      },
+      {
+        "name": "Offcolor Surveil/Empower",
+        "cards": [
+          "Arcane Amphisbaena",
+          "Avatar of Burgeoning Echoes",
+          "Inspired Tethermage",
+          "No Admittance",
+          "Overwrite the Multiverse",
+          "Rewrite Regrets",
+          "Sanctum Lurker",
+          "Solve for Disappointment",
+          "Tam's Resistance",
+          "Violent Echoes",
+          "Vraska's Final Mercy",
+          "Way of the Deathbringer",
+          "Way of the Necromancer",
+          "Way of the Paradox",
+          "Way of the Pyromancer",
+          "Way of the Warlord",
+          "Way of the Wildspeaker"
+        ]
+      }
+    ]
+  },
+  "br_faceburn": {
+    "label": "B/R Face Burn",
+    "colors": [
+      "B",
+      "R"
+    ],
+    "categories": [
+      {
+        "name": "Noncombat Damage Payoffs",
+        "cards": [
+          "Command the Stage",
+          "Grim Repriser",
+          "Massacre Girl, Most Wanted",
+          "Tomik, Izzet Sparkmage",
+          "Whiplash Wordsmith"
+        ]
+      },
+      {
+        "name": "Noncombat Damage Sources",
+        "cards": [
+          "Ajani's Anguish",
+          "Cast Away Doubt",
+          "Chandra, Torch of Defiance",
+          "Clash of Elements",
+          "Extended Absence",
+          "Eye of Jace",
+          "Gideon the Oathless",
+          "Hallway Heckler",
+          "Ingris Stingerquill",
+          "Koth, the Geomancer",
+          "Massacre Girl, Most Wanted",
+          "No Admittance",
+          "Sanctum Lurker",
+          "Screeching Soulbreaker",
+          "Stingerquill Charm",
+          "Stingerquill Voxmancer",
+          "Stinging Vitriol",
+          "Tether Technician",
+          "Tetsuko Umezawa, Pursuer",
+          "Tinybones, Pocket Nuisance",
+          "Warrior's Blades",
+          "Way of the Warlord",
+          "Whiplash Wordsmith"
+        ]
+      }
+    ]
+  },
+  "ub_graveyard": {
+    "label": "U/B Graveyard",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "categories": [
+      {
+        "name": "Threshold/Scaling Payoffs",
+        "cards": [
+          "Cruel Calculations",
+          "Dark Matter Manipulator",
+          "Eye of Jace",
+          "Loot, the Anomaly",
+          "Null Summoner",
+          "Proft, Sinister Mastermind",
+          "Recursive Recruitment",
+          "Tarmogoyf",
+          "Theorix Metamage",
+          "Void Extrapolator",
+          "Winter, Tormented Loner",
+          "Yuriko, Hope from the Shadows"
+        ]
+      },
+      {
+        "name": "Works From the Graveyard",
+        "cards": [
+          "Bestial Incursion",
+          "Blessed Ghoul",
+          "Campus Crier",
+          "Command the Stage",
+          "Cryotheory Adept",
+          "Darklight Phoenix",
+          "Gallia, Tragic Host",
+          "Generous Revival",
+          "Grim Repriser",
+          "Predictive Preparations",
+          "Proctor of Potential",
+          "Puppet Crafting",
+          "Recursive Recruitment",
+          "Seasoned Cryomancer",
+          "Theoretical Necromancer",
+          "Twinned Vision"
+        ]
+      },
+      {
+        "name": "Recursion",
+        "cards": [
+          "Carnivorous Cultivator",
+          "Fateshaper Aspirant",
+          "Liliana the Repentant",
+          "Marwyn, the Preserver",
+          "Primal Witchstalker",
+          "Restore with Empathy",
+          "Return to the Light Realms",
+          "Stingcaster Mage",
+          "Theoretical Necromancer"
+        ]
+      },
+      {
+        "name": "Ways to Mill",
+        "cards": [
+          "Dark Matter Manipulator",
+          "Liliana the Repentant",
+          "Paradox Shaper",
+          "Primal Witchstalker",
+          "Something Worth Saving",
+          "Theorix Charm",
+          "Theorix Metamage",
+          "Void Extrapolator"
+        ]
+      },
+      {
+        "name": "Other Ways to Fill the Graveyard",
+        "cards": [
+          "Academic Ascent",
+          "Ajani Unrelenting",
+          "Apex Witchstalker",
+          "Arcane Amphisbaena",
+          "Arni, Humble Scribe",
+          "Avatar of Burgeoning Echoes",
+          "Awaken the Inferno",
+          "Campus Crier",
+          "Carnivorous Cultivator",
+          "Chandra, Chill of Compliance",
+          "Countersculpt",
+          "Curse-Marred Demon",
+          "Diviner of Victory",
+          "Divining Duelist",
+          "Enlightened Confidant",
+          "Eye of Jace",
+          "Fatehold Charm",
+          "Fatehold Chronologist",
+          "Gideon's Memorial",
+          "Hallway Heckler",
+          "Hexhaven Battalion",
+          "Inspired Tethermage",
+          "Jace's Machinations",
+          "Jace, Reality Sculptor",
+          "Jiang Yanggu, Alone",
+          "Keeper of the Quiet Hour",
+          "Liliana the Faultless",
+          "Mindseeker Oculus",
+          "Murmuring Volume",
+          "No Admittance",
+          "Overwrite the Multiverse",
+          "Pia, Aether Ascetic",
+          "Plan for All Outcomes",
+          "Pompous Battlemage",
+          "Proctor of Potential",
+          "Proft, Sinister Mastermind",
+          "Protege's Awakening",
+          "Prudent Fateseer",
+          "Refute Destiny",
+          "Repurposed Enforcer",
+          "Rewrite Regrets",
+          "Sanctum Lurker",
+          "Seasoned Cryomancer",
+          "Semester Foreseer",
+          "Solitary Cell",
+          "Solve for Disappointment",
+          "Sphinx of False Conclusions",
+          "Sureshot Sower",
+          "Surveillance Phantasm",
+          "Tam's Resistance",
+          "Tether Technician",
+          "The Echoverse Fulcrum",
+          "Theorist's Proxy",
+          "Theorist's Sanctum",
+          "Twinned Vision",
+          "Undulating Witness",
+          "Variable Chaser",
+          "Vinelasher Adept",
+          "Violent Echoes",
+          "Vraska's Final Mercy",
+          "Way of the Cryomancer",
+          "Way of the Deathbringer",
+          "Way of the Healer",
+          "Way of the Mentor",
+          "Way of the Mind Sculptor",
+          "Way of the Necromancer",
+          "Way of the Paradox",
+          "Way of the Pyromancer",
+          "Way of the Warlord",
+          "Way of the Wildspeaker",
+          "Your Fate Ends Here",
+          "Yuriko, Hope from the Shadows"
+        ]
+      }
+    ]
+  },
+  "rg_ramp": {
+    "label": "R/G Ramp",
+    "colors": [
+      "R",
+      "G"
+    ],
+    "categories": [
+      {
+        "name": "Mana Ramp",
+        "cards": [
+          "Aerid Konstrari",
+          "Chandra, Torch of Defiance",
+          "Emrakul, the Exigent Doom",
+          "Gardenize",
+          "Greenhouse Propagator",
+          "Heartwood Crafter",
+          "Hungering Puppetbeast",
+          "Konstrari Charm",
+          "Konstrari Improviser",
+          "Koth, the Geomancer",
+          "Kwia Vigorbloom",
+          "Loot, the Nexus",
+          "Murmuring Volume",
+          "Tenured Tethermage",
+          "Vraska, Soul of Stone",
+          "Way of the Pyromancer",
+          "Woodwork Prodigy"
+        ]
+      },
+      {
+        "name": "Land Ramp",
+        "cards": [
+          "Primal Witchstalker",
+          "Simulacrum Shaper",
+          "Way of the Paradox"
+        ]
+      },
+      {
+        "name": "Ways to Fetch Lands",
+        "cards": [
+          "Apex Witchstalker",
+          "Awaken the Inferno",
+          "Carnivorous Cultivator",
+          "Fblthp, Knows the Way",
+          "Hexhaven Battalion",
+          "Marwyn, the Preserver",
+          "Restore with Empathy",
+          "Undulating Witness",
+          "Vinelasher Adept"
+        ]
+      },
+      {
+        "name": "Ramp Payoffs",
+        "cards": [
+          "Aerid Konstrari",
+          "Ajani's Anguish",
+          "Bloombrute",
+          "Craftwork Crusher",
+          "Craterclaw Colossus",
+          "Edgar, Moonlit Sovereign",
+          "Emrakul, the Exigent Doom",
+          "Face Yourself",
+          "Fblthp, Knows the Way",
+          "Ghalta the Immovable",
+          "Ghalta the Unstoppable",
+          "Guiding Hydra",
+          "Ingris Stingerquill",
+          "Inspired Tethermage",
+          "Karn, Gilded Guardian",
+          "Kindred Judgment",
+          "Kiora of Fire and Ashes",
+          "Living Library",
+          "Pia, Determined Rebuilder",
+          "Return to the Light Realms",
+          "Ruric Thar, Magecrusher",
+          "Shatterwing Pegasus",
+          "Skilled Battlecarver",
+          "Surveillance Phantasm",
+          "Verdant Kraken",
+          "Wrecking Gecko",
+          "Yoshimaru, Beloved Companion",
+          "Yoshimaru, Scrappy Stray"
+        ]
+      }
+    ]
+  }
+}
