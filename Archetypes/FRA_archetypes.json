@@ -5,11 +5,103 @@
     "categories": [
       {
         "name": "Removal",
-        "cards": []
+        "cards": [
+          "Ajani Unrelenting",
+          "Ajani's Anguish",
+          "Archive Arbiter",
+          "Awaken the Inferno",
+          "Break Under Pressure",
+          "Chandra, Torch of Defiance",
+          "Clash of Elements",
+          "Compel Brutality",
+          "Craftwork Crusher",
+          "Essence Burn",
+          "Extended Absence",
+          "Flourishing Grapple",
+          "Fulminous Forte",
+          "Garruk, Veiled Butcher",
+          "Gideon's Memorial",
+          "Hapatra, the Desert Fang",
+          "Infinite Coursework",
+          "Kindred Judgment",
+          "Konstrari Charm",
+          "Last Gasp",
+          "Lich's Relic",
+          "Living Library",
+          "Memory Trap",
+          "Mind Meanderer",
+          "No Admittance",
+          "Overwrite the Multiverse",
+          "Plan for All Outcomes",
+          "Proft, Sinister Mastermind",
+          "Prophesied End",
+          "Refute Destiny",
+          "Rise of the Deathbringer",
+          "Silence the Echo",
+          "Solitary Cell",
+          "Stingerquill Charm",
+          "Sureshot Sower",
+          "Surgical Precision",
+          "Terminal Criticism",
+          "Tether Technician",
+          "The Echoverse Fulcrum",
+          "Theorix Charm",
+          "Twisted Fates",
+          "Vigorbloom Charm",
+          "Vindictive Triumph",
+          "Violent Echoes",
+          "Vraska's Final Mercy",
+          "Vraska, the Cutting Glare",
+          "Warrior's Blades",
+          "Way of the Warlord",
+          "Winter, Tormented Loner",
+          "Wrath of the Bloodmane",
+          "Yoshimaru, Scrappy Stray",
+          "Your Fate Ends Here"
+        ]
       },
       {
         "name": "Fixing",
-        "cards": []
+        "cards": [
+          "Aerid Konstrari",
+          "Apex Witchstalker",
+          "Awaken the Inferno",
+          "Carnivorous Cultivator",
+          "Dedicated Commons",
+          "Deserted Beach",
+          "Fatehold Annex",
+          "Fblthp, Knows the Way",
+          "Formidable Commons",
+          "Haunted Ridge",
+          "Heartwood Crafter",
+          "Hexhaven Battalion",
+          "Hexhaven Invigorator",
+          "Hungering Puppetbeast",
+          "Innovative Commons",
+          "Konstrari Annex",
+          "Konstrari Improviser",
+          "Kwia Vigorbloom",
+          "Loot, the Nexus",
+          "Marwyn, the Preserver",
+          "Meticulous Commons",
+          "Murmuring Volume",
+          "Overgrown Farmland",
+          "Primal Witchstalker",
+          "Restore with Empathy",
+          "Rockfall Vale",
+          "Room of Refuge",
+          "Shipwreck Marsh",
+          "Simulacrum Shaper",
+          "Stingerquill Annex",
+          "Tenured Tethermage",
+          "Theorix Annex",
+          "Transformative Commons",
+          "Undulating Witness",
+          "Vigorbloom Annex",
+          "Vinelasher Adept",
+          "Vraska, Soul of Stone",
+          "Woodwork Prodigy"
+        ]
       }
     ]
   },
@@ -189,11 +281,13 @@
         "cards": [
           "Carnivorous Cultivator",
           "Fateshaper Aspirant",
+          "Generous Revival",
           "Liliana the Repentant",
           "Marwyn, the Preserver",
           "Primal Witchstalker",
           "Restore with Empathy",
           "Return to the Light Realms",
+          "Rewrite Regrets",
           "Stingcaster Mage",
           "Theoretical Necromancer"
         ]
@@ -322,6 +416,7 @@
       {
         "name": "Land Ramp",
         "cards": [
+          "Hexhaven Invigorator",
           "Primal Witchstalker",
           "Simulacrum Shaper",
           "Way of the Paradox"
@@ -372,6 +467,410 @@
           "Wrecking Gecko",
           "Yoshimaru, Beloved Companion",
           "Yoshimaru, Scrappy Stray"
+        ]
+      }
+    ]
+  },
+  "gw_lifegain": {
+    "label": "G/W Lifegain",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "categories": [
+      {
+        "name": "Lifegain Payoffs",
+        "cards": [
+          "Ajani Resolute",
+          "Bloombrute",
+          "Enlightened Confidant",
+          "Germinate Recruits",
+          "Kwia Vigorbloom",
+          "Lyra, Archangel of Dawn",
+          "Titanbones, Towering Heart",
+          "Unflinching Hortimancer",
+          "Way of the Mentor"
+        ]
+      },
+      {
+        "name": "Ways to Gain Life",
+        "cards": [
+          "Ajani Resolute",
+          "Archive Arbiter",
+          "Blessed Ghoul",
+          "Bloombrute",
+          "Blossom-Blessed Angel",
+          "Emergency Phytomedic",
+          "Enlightened Confidant",
+          "Eye of Jace",
+          "Greenhouse Propagator",
+          "Koth of the Homestead",
+          "Kwia Vigorbloom",
+          "Liliana the Faultless",
+          "Medic's Kitesail",
+          "Restore with Empathy",
+          "Solarium Sentry",
+          "Something Worth Saving",
+          "Surgical Precision",
+          "Thalia, the Survivor",
+          "Titanbones, Towering Heart",
+          "Vigorbloom Charm",
+          "Vigorbloom Vanguard",
+          "Way of the Paradox"
+        ]
+      }
+    ]
+  },
+  "wb_attrition": {
+    "label": "W/B Attrition",
+    "colors": [
+      "W",
+      "B"
+    ],
+    "categories": [
+      {
+        "name": "Death Payoffs",
+        "cards": [
+          "Apex Witchstalker",
+          "Bloodline Recollector",
+          "Darklight Phoenix",
+          "Edgar, Ancient Bloodlord",
+          "Graft Surgeon",
+          "Massacre Girl, Most Wanted",
+          "Way of the Necromancer"
+        ]
+      },
+      {
+        "name": "Sacrifice Outlets",
+        "cards": [
+          "Edgar, Ancient Bloodlord",
+          "Garruk, Veiled Butcher",
+          "Loot, the Anomaly",
+          "Silence the Echo",
+          "Way of the Deathbringer",
+          "Winter, Tormented Loner"
+        ]
+      },
+      {
+        "name": "Recursion",
+        "cards": [
+          "Blessed Ghoul",
+          "Darklight Phoenix",
+          "Fateshaper Aspirant",
+          "Gallia, Tragic Host",
+          "Generous Revival",
+          "Liliana the Repentant",
+          "Return to the Light Realms",
+          "Rewrite Regrets",
+          "Theoretical Necromancer"
+        ]
+      },
+      {
+        "name": "Recursion Targets",
+        "cards": [
+          "Dark Matter Manipulator",
+          "Graft Surgeon",
+          "Keeper of the Quiet Hour",
+          "Mabel, Bitter Recluse",
+          "Rank Rat",
+          "Sanctum Lurker",
+          "Teyo, Lightshield Expert",
+          "Tinybones, Pocket Nuisance",
+          "Winter, Tormented Loner"
+        ]
+      },
+      {
+        "name": "Drain",
+        "cards": [
+          "Extended Absence",
+          "Eye of Jace",
+          "Gideon the Oathless",
+          "Massacre Girl, Most Wanted",
+          "Sanctum Lurker",
+          "Screeching Soulbreaker",
+          "Stingerquill Voxmancer",
+          "Tinybones, Pocket Nuisance",
+          "Whiplash Wordsmith"
+        ]
+      }
+    ]
+  },
+  "ur_spells": {
+    "label": "U/R Noncreature Spells",
+    "colors": [
+      "U",
+      "R"
+    ],
+    "categories": [
+      {
+        "name": "Prowess Cards",
+        "cards": [
+          "Cryotheory Adept",
+          "Pompous Battlemage",
+          "Pyre Rhymer",
+          "Ruric Thar, Biomagus",
+          "Tetsuko Umezawa, Pursuer",
+          "Tomik, Izzet Sparkmage",
+          "Traxos, Academy Guardian",
+          "Variable Chaser"
+        ]
+      },
+      {
+        "name": "Other Noncreature Payoffs",
+        "cards": [
+          "Chandra's Emberling",
+          "Geist of Saint Thalia",
+          "Plan for All Outcomes",
+          "Saheeli, Jewel of Avishkar",
+          "Traxos, Academy Guardian",
+          "Way of the Cryomancer",
+          "Winter, Team Player"
+        ]
+      },
+      {
+        "name": "Noncreatures That Count as Creatures",
+        "cards": [
+          "Ajani Unrelenting",
+          "Command the Stage",
+          "Diviner of Victory",
+          "Fatehold Chronologist",
+          "Hallway Heckler",
+          "Konstrari Improviser",
+          "Paradox Shaper",
+          "Pompous Battlemage",
+          "Prudent Fateseer",
+          "Pyre Rhymer",
+          "Semester Foreseer",
+          "Stingerquill Voxmancer",
+          "The Theorist, Jace Beleren",
+          "Theorix Metamage",
+          "Variable Chaser",
+          "Whiplash Wordsmith",
+          "Woodwork Prodigy"
+        ]
+      }
+    ]
+  },
+  "bg_deathtouch": {
+    "label": "B/G Deathtouch/Trample",
+    "colors": [
+      "B",
+      "G"
+    ],
+    "categories": [
+      {
+        "name": "Has Deathtouch",
+        "cards": [
+          "Arcane Amphisbaena",
+          "Carnivorous Cultivator",
+          "Mabel, Bitter Recluse",
+          "Rampart Hunter",
+          "Vraska, the Cutting Glare"
+        ]
+      },
+      {
+        "name": "Grants Deathtouch",
+        "cards": [
+          "Ferocity of the Hunt",
+          "Hunter's Axe",
+          "Rampart Hunter",
+          "Teyo, Diamondblade Mage"
+        ]
+      },
+      {
+        "name": "Has Trample",
+        "cards": [
+          "Bestial Incursion",
+          "Emrakul, the Exigent Doom",
+          "Garruk, Curse Breaker",
+          "Garruk, Veiled Butcher",
+          "Ghalta the Unstoppable",
+          "Hungering Puppetbeast",
+          "Ruric Thar, Magecrusher",
+          "Traxos, Scourge Eternal",
+          "Way of the Deathbringer",
+          "Way of the Wildspeaker",
+          "Wrecking Gecko"
+        ]
+      },
+      {
+        "name": "Grants Trample",
+        "cards": [
+          "Garruk, Curse Breaker",
+          "Ghalta the Unstoppable",
+          "Hunter's Axe"
+        ]
+      }
+    ]
+  },
+  "rw_counters": {
+    "label": "R/W +1/+1 Counters",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "categories": [
+      {
+        "name": "Ways to Put +1/+1 Counters",
+        "cards": [
+          "Ajani Resolute",
+          "Awaken the Inferno",
+          "Blossom-Blessed Angel",
+          "Chandra's Emberling",
+          "Charge the Sanctum",
+          "Command the Stage",
+          "Emergency Phytomedic",
+          "Fateshaper Aspirant",
+          "Gallia, the Merrymaker",
+          "Generous Revival",
+          "Graft Surgeon",
+          "Guiding Hydra",
+          "Jiang Yanggu, Alone",
+          "Koth of the Homestead",
+          "Lyra, Archangel of Dawn",
+          "Mabel, Valley Hero",
+          "Predictive Preparations",
+          "Room of Refuge",
+          "Teyo, Lightshield Expert",
+          "Unflinching Hortimancer",
+          "Vigorbloom Vanguard",
+          "Yoshimaru, Beloved Companion"
+        ]
+      },
+      {
+        "name": "+1/+1 Counter Payoffs",
+        "cards": [
+          "Blossom-Blessed Angel",
+          "Curse-Marred Demon",
+          "Gallia, the Merrymaker",
+          "Tetsuko Umezawa, Pursuer",
+          "Tomik, Orzhov Lawmage",
+          "Vigorbloom Vanguard",
+          "Warrior's Blades"
+        ]
+      }
+    ]
+  },
+  "gu_planeswalkers": {
+    "label": "G/U Empower Jace",
+    "colors": [
+      "G",
+      "U"
+    ],
+    "categories": [
+      {
+        "name": "Empower Jace",
+        "cards": [
+          "Academic Ascent",
+          "Arcane Amphisbaena",
+          "Avatar of Burgeoning Echoes",
+          "Campus Crier",
+          "Countersculpt",
+          "Fatehold Charm",
+          "Hexhaven Battalion",
+          "Inspired Tethermage",
+          "Jace's Machinations",
+          "Jace, Reality Sculptor",
+          "Keeper of the Quiet Hour",
+          "Mindseeker Oculus",
+          "No Admittance",
+          "Overwrite the Multiverse",
+          "Plan for All Outcomes",
+          "Protege's Awakening",
+          "Repurposed Enforcer",
+          "Rewrite Regrets",
+          "Sanctum Lurker",
+          "Solve for Disappointment",
+          "Tam's Resistance",
+          "Theorist's Proxy",
+          "Theorist's Sanctum",
+          "Violent Echoes",
+          "Vraska's Final Mercy",
+          "Way of the Cryomancer",
+          "Way of the Deathbringer",
+          "Way of the Healer",
+          "Way of the Mentor",
+          "Way of the Mind Sculptor",
+          "Way of the Necromancer",
+          "Way of the Paradox",
+          "Way of the Pyromancer",
+          "Way of the Warlord",
+          "Way of the Wildspeaker"
+        ]
+      },
+      {
+        "name": "Planeswalker Payoffs",
+        "cards": [
+          "Ajani Unrelenting",
+          "Avatar of Burgeoning Echoes",
+          "Compel Brutality",
+          "Countersculpt",
+          "Entrust the Spark",
+          "Inspired Tethermage",
+          "Jace's Machinations",
+          "Jace, Reality Sculptor",
+          "Kiora of Salt and Sand",
+          "Loyal Tutor",
+          "Mind Meanderer",
+          "Sanctum Lurker",
+          "Tam, the Possibility",
+          "Teyo, Diamondblade Mage",
+          "Teyo, Lightshield Expert",
+          "Theorist's Sanctum",
+          "Tomik, Orzhov Lawmage",
+          "Way of the Cryomancer",
+          "Way of the Deathbringer",
+          "Way of the Healer",
+          "Way of the Mentor",
+          "Way of the Mind Sculptor",
+          "Way of the Necromancer",
+          "Way of the Paradox",
+          "Way of the Pyromancer",
+          "Way of the Warlord",
+          "Way of the Wildspeaker"
+        ]
+      },
+      {
+        "name": "Fixing",
+        "cards": [
+          "Aerid Konstrari",
+          "Apex Witchstalker",
+          "Awaken the Inferno",
+          "Carnivorous Cultivator",
+          "Dedicated Commons",
+          "Deserted Beach",
+          "Fatehold Annex",
+          "Fblthp, Knows the Way",
+          "Formidable Commons",
+          "Haunted Ridge",
+          "Heartwood Crafter",
+          "Hexhaven Battalion",
+          "Hexhaven Invigorator",
+          "Hungering Puppetbeast",
+          "Innovative Commons",
+          "Konstrari Annex",
+          "Konstrari Improviser",
+          "Kwia Vigorbloom",
+          "Loot, the Nexus",
+          "Marwyn, the Preserver",
+          "Meticulous Commons",
+          "Murmuring Volume",
+          "Overgrown Farmland",
+          "Primal Witchstalker",
+          "Restore with Empathy",
+          "Rockfall Vale",
+          "Room of Refuge",
+          "Shipwreck Marsh",
+          "Simulacrum Shaper",
+          "Stingerquill Annex",
+          "Tenured Tethermage",
+          "Theorix Annex",
+          "Transformative Commons",
+          "Undulating Witness",
+          "Vigorbloom Annex",
+          "Vinelasher Adept",
+          "Vraska, Soul of Stone",
+          "Woodwork Prodigy"
         ]
       }
     ]
