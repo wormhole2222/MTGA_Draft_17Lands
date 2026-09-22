@@ -197,6 +197,7 @@
           "Command the Stage",
           "Grim Repriser",
           "Massacre Girl, Most Wanted",
+          "Master of Barbs",
           "Tomik, Izzet Sparkmage",
           "Whiplash Wordsmith"
         ]
@@ -244,12 +245,14 @@
           "Cruel Calculations",
           "Dark Matter Manipulator",
           "Eye of Jace",
+          "Hapatra, the Desert Fang",
           "Loot, the Anomaly",
           "Null Summoner",
           "Proft, Sinister Mastermind",
           "Recursive Recruitment",
           "Tarmogoyf",
           "Theorix Metamage",
+          "Uldaros Theorix",
           "Void Extrapolator",
           "Winter, Tormented Loner",
           "Yuriko, Hope from the Shadows"
@@ -456,6 +459,7 @@
           "Karn, Gilded Guardian",
           "Kindred Judgment",
           "Kiora of Fire and Ashes",
+          "Liliana the Repentant",
           "Living Library",
           "Pia, Determined Rebuilder",
           "Return to the Light Realms",
@@ -535,6 +539,7 @@
           "Bloodline Recollector",
           "Darklight Phoenix",
           "Edgar, Ancient Bloodlord",
+          "Ferocity of the Hunt",
           "Graft Surgeon",
           "Massacre Girl, Most Wanted",
           "Way of the Necromancer"
@@ -557,6 +562,7 @@
           "Blessed Ghoul",
           "Darklight Phoenix",
           "Fateshaper Aspirant",
+          "Ferocity of the Hunt",
           "Gallia, Tragic Host",
           "Generous Revival",
           "Liliana the Repentant",
@@ -582,6 +588,8 @@
       {
         "name": "Drain",
         "cards": [
+          "Bloodline Recollector",
+          "Cast Away Doubt",
           "Extended Absence",
           "Eye of Jace",
           "Gideon the Oathless",
@@ -622,6 +630,7 @@
           "Geist of Saint Thalia",
           "Plan for All Outcomes",
           "Saheeli, Jewel of Avishkar",
+          "Stingcaster Mage",
           "Traxos, Academy Guardian",
           "Way of the Cryomancer",
           "Winter, Team Player"
@@ -746,7 +755,8 @@
           "Tetsuko Umezawa, Pursuer",
           "Tomik, Orzhov Lawmage",
           "Vigorbloom Vanguard",
-          "Warrior's Blades"
+          "Warrior's Blades",
+          "Yoshimaru, Beloved Companion"
         ]
       }
     ]
