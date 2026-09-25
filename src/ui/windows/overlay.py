@@ -507,7 +507,13 @@ class CompactOverlay(tb.Toplevel):
         rec_map = {r.card_name: r for r in (recommendations or [])}
 
         def _populate_tree(
-            tree, manager, card_list, show_recs=False, is_pool=False, picked_cards=None
+            tree,
+            manager,
+            card_list,
+            show_recs=False,
+            is_pool=False,
+            picked_cards=None,
+            is_wheel=False,
         ):
             for item in tree.get_children():
                 tree.delete(item)
@@ -527,7 +533,7 @@ class CompactOverlay(tb.Toplevel):
                     )
 
                 is_picked = False
-                if picked_cards and show_recs:
+                if picked_cards:
                     if any(
                         c.get(constants.DATA_FIELD_NAME) == name for c in picked_cards
                     ):
@@ -545,7 +551,7 @@ class CompactOverlay(tb.Toplevel):
                             row_tag = "high_fit"
 
                 if is_picked:
-                    row_tag = "picked"
+                    row_tag = "picked_wheel" if is_wheel else "picked"
 
                 row_values = []
                 for field in manager.active_fields:
@@ -663,6 +669,8 @@ class CompactOverlay(tb.Toplevel):
             missing_cards,
             show_recs=False,
             is_pool=False,
+            picked_cards=picked_cards,
+            is_wheel=True,
         )
 
         self.pool_tree = self.pool_manager.tree

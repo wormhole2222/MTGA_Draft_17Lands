@@ -877,6 +877,9 @@ class ModernTreeview(ttk.Treeview):
             ("elite_bomb", "#78350f", "#fde047"),
             ("high_fit", "#0c4a6e", "#e0f2fe"),
             ("picked", "#15803d", "#ffffff"),
+            # Same green, but never animated: the wheel tracker holds this tag for as
+            # long as the wheeled pack is in front of you, so a pulse would just blink.
+            ("picked_wheel", "#15803d", "#ffffff"),
         ]:
             self.tag_configure(
                 (

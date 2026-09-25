@@ -273,7 +273,13 @@ class AppController:
             current_picked_cards,
         )
         self.app.dashboard.update_pack_data(
-            missing_cards, colors, metrics, tier_data, pi, "missing"
+            missing_cards,
+            colors,
+            metrics,
+            tier_data,
+            pi,
+            "missing",
+            picked_cards=current_picked_cards,
         )
 
         deck_metrics = get_deck_metrics(taken_cards)

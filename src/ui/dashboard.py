@@ -682,7 +682,7 @@ class DashboardFrame(ttk.Frame):
                 row_tag = row_color_tag(card.get(constants.DATA_FIELD_MANA_COST, ""))
 
             is_picked = False
-            if picked_cards and source_type == "pack":
+            if picked_cards:
                 if any(c.get(constants.DATA_FIELD_NAME) == name for c in picked_cards):
                     is_picked = True
 
@@ -704,7 +704,7 @@ class DashboardFrame(ttk.Frame):
                     )
 
             if is_picked:
-                row_tag = "picked"
+                row_tag = "picked" if source_type == "pack" else "picked_wheel"
 
             returnable_at = card.get("returnable_at", [])
             if returnable_at:
