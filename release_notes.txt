@@ -1,3 +1,9 @@
+===================== RELEASE NOTES 4.22-jr =====================
+* wormhole2222: [Merge] Synced the fork with upstream 4.20 and 4.21 (Cube dataset downloads fixed, automatic Player.log discovery for Flatpak/snap Steam, Lutris and Bottles on Linux, a Tcl 9 startup crash fix, the HOB event schedule, and dependency updates). See the 4.21 / 4.20 notes below.
+* wormhole2222: [Set Data] Added FRA (Reality Fracture): all ten draft archetypes plus a Removal/Fixing tracker, and an initial set of two-card combos. Includes the set's ten Special Guests.
+* wormhole2222: [UX/UI] When a pack wheels back to you, the Seen Cards (Wheel Tracker) table now highlights the card you took from it in green.
+* wormhole2222: [Bug] Fixed the Two Card Combo Alerts and Archetype Tracker panels always being empty in the macOS and Linux builds. Their per-set data files were only installed by the Windows installer; they are now bundled into every build.
+
 ===================== RELEASE NOTES 4.21-jr =====================
 * wormhole2222: [Bug] Fixed Arena Opens with the new "Limited Open" event naming (e.g. HOBLimitedOpen_Draft1) not being recognized, which left the overlay with no dataset, pick ratings, archetype tracker, or combo alerts for the entire draft. The set code is now read directly from the event name, so it works for Draft 1 and Draft 2 and for any set, not just the newest one.
 * wormhole2222: [Bug] Fixed the cached set list overriding newly added event-detection rules until the cache expired.
