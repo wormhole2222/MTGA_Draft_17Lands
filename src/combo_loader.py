@@ -6,11 +6,14 @@ between the current pack and the player's drafted pool.
 
 import os
 from typing import List, Tuple
-from src.constants import COMBOS_FOLDER
+from src.constants import COMBOS_FOLDER, RESOURCE_DIR
 
 
 def get_combo_file_path(set_code: str) -> str:
-    return os.path.join(COMBOS_FOLDER, f"{set_code}_combos.txt")
+    name = f"{set_code}_combos.txt"
+    path = os.path.join(COMBOS_FOLDER, name)
+    # Mac/Linux builds have no Combos folder beside the app; use the bundled copy.
+    return path if os.path.isfile(path) else os.path.join(RESOURCE_DIR, "Combos", name)
 
 
 def combo_file_exists(set_code: str) -> bool:
